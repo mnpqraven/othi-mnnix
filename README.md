@@ -1,10 +1,14 @@
-# OthiMnnix
+# [Othi's monorepo](https://github.com/mnpqraven/othi-monorepo/) but with nix + nx
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
 ✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+This repo is scaffolded by following these guides
+- [TypeScript Project References and PNPM Workspaces in Nx Monorepos](https://moatorres-blog.vercel.app/blog/technology/typescript-project-references-and-pnpm-workspaces-in-nx-monorepos)
+- [Breaking Down Libraries in Nx Monorepos with TypeScript Project References](https://moatorres-blog.vercel.app/blog/technology/breaking-down-libraries-in-nx-monorepos-with-typescript-project-references)
+
+[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `pnpx nx graph` to visually explore what was created. Now, let's get you up to speed!
 
 ## Finish your CI setup
 
@@ -14,7 +18,7 @@
 ## Generate a library
 
 ```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+pnpx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
 ```
 
 ## Run tasks
@@ -22,13 +26,13 @@ npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
 To build the library use:
 
 ```sh
-npx nx build pkg1
+pnpx nx build pkg1
 ```
 
 To run any task with Nx use:
 
 ```sh
-npx nx <target> <project-name>
+pnpx nx <target> <project-name>
 ```
 
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
@@ -40,7 +44,7 @@ These targets are either [inferred automatically](https://nx.dev/concepts/inferr
 To version and release the library use
 
 ```
-npx nx release
+pnpx nx release
 ```
 
 Pass `--dry-run` to see what would happen without actually releasing the library.
@@ -54,13 +58,13 @@ Nx automatically updates TypeScript [project references](https://www.typescriptl
 To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
 
 ```sh
-npx nx sync
+pnpx nx sync
 ```
 
 You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
 
 ```sh
-npx nx sync:check
+pnpx nx sync:check
 ```
 
 [Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
