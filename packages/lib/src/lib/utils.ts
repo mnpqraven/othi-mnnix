@@ -1,6 +1,6 @@
-import { PaginationState } from "@tanstack/react-table";
+import type { PaginationState } from "@tanstack/react-table";
 import { type ClassValue, clsx } from "clsx";
-import Fuse, { FuseOptionKey } from "fuse.js";
+import Fuse, { type FuseOptionKey } from "fuse.js";
 import { twMerge } from "tailwind-merge";
 import { ulid } from "ulid";
 
@@ -29,13 +29,14 @@ export function search<T>(
   });
 
   if (query?.length) return fz.search(query).map((e) => e.item);
-  else return data;
+  return data;
 }
 
 export function* range(start: number, end: number, step = 1) {
   while (start <= end) {
     yield start;
     // eslint-disable-next-line no-param-reassign
+    // biome-ignore lint/style/noParameterAssign: yield fn
     start += step;
   }
 }
@@ -69,16 +70,18 @@ export function rotate<T>(by: number, data: T[]): T[] {
   if (data.length === 0) return data;
   if (by === 0) return data;
   if (by < 0) {
-    let temp = data;
+    const temp = data;
     for (let index = 0; index < by * -1; index++) {
-      temp.push(temp.shift()!);
+      const t = temp.shift();
+      if (t) temp.push(t);
     }
     return temp;
   }
 
-  let temp = data;
+  const temp = data;
   for (let index = 0; index < by; index++) {
-    temp.unshift(temp.pop()!);
+    const t = temp.pop();
+    if (t) temp.unshift(t);
   }
   return temp;
 }

@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  ColumnDef,
-  ColumnFiltersState,
-  InitialTableState,
-  OnChangeFn,
-  PaginationState,
-  RowSelectionState,
+  type ColumnDef,
+  type ColumnFiltersState,
+  type InitialTableState,
+  type OnChangeFn,
+  type PaginationState,
+  type RowSelectionState,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
@@ -28,6 +28,7 @@ interface Props<TData> {
    * @link https://github.com/TanStack/table/issues/4566
    * */
   data: TData[];
+  // biome-ignore lint/suspicious/noExplicitAny: library code
   columns: ColumnDef<TData, any>[];
   pageCount?: number;
   initialState?: InitialTableState | undefined;

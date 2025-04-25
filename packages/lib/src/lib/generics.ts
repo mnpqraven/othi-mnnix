@@ -15,7 +15,8 @@ type DottablePaths<T, P extends Prev[number] = 10> =
   | []
   | ([P] extends [never]
       ? never
-      : T extends readonly any[]
+      : // biome-ignore lint/suspicious/noExplicitAny: lib code
+        T extends readonly any[]
         ? never
         : T extends object
           ? {
@@ -62,7 +63,10 @@ type BadChars = z.infer<typeof badChars>;
 type ExtractDottable<K extends PropertyKey> = K extends string
   ? string extends K
     ? never
-    : K extends `${Digit}${infer _}` | `${infer _}${BadChars}${infer _}`
+    : K extends
+          | `${Digit}${infer _}`
+          // biome-ignore lint/suspicious/noRedeclare: lib code
+          | `${infer _}${BadChars}${infer _}`
       ? never
       : K
   : never;

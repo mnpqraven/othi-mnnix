@@ -1,6 +1,6 @@
-import { useCallback } from "react";
 import { useSetAtom } from "jotai";
 import type { PrimitiveAtom } from "jotai";
+import { useCallback } from "react";
 
 export function useSetReducerAtom<Value, Action>(
   anAtom: PrimitiveAtom<Value>,
