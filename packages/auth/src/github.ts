@@ -1,6 +1,6 @@
+import { env } from "@repo/env";
 import type { getServerSession } from "next-auth";
 import type { NextRequestWithAuth } from "next-auth/middleware";
-import { env } from "@repo/env";
 import { authOptions } from "./authOptions";
 
 const DEV = env.DEBUG_AUTH;
@@ -35,14 +35,14 @@ export async function isSuperAdmin({
   if (sessionFn) {
     const session = await sessionFn(authOptions);
     const gh = await getGithubUser(session?.user?.access_token);
-    if (DEV) console.log(`[AUTH][sessionFn]`, gh);
+    if (DEV) console.log("[AUTH][sessionFn]", gh);
 
     return internalIsSudo(gh?.ghUser);
   }
 
   if (accessToken) {
     const gh = await getGithubUser(accessToken);
-    if (DEV) console.log(`[AUTH][accessToken]`, gh);
+    if (DEV) console.log("[AUTH][accessToken]", gh);
 
     return internalIsSudo(gh?.ghUser);
   }

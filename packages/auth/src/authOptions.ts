@@ -1,6 +1,6 @@
-import GithubProvider from "next-auth/providers/github";
-import type { NextAuthOptions } from "next-auth";
 import { env } from "@repo/env";
+import type { NextAuthOptions } from "next-auth";
+import GithubProvider from "next-auth/providers/github";
 
 export const authOptions: NextAuthOptions = {
   secret: env.NEXTAUTH_SECRET,
