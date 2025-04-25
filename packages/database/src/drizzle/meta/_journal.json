@@ -1,5 +1,13 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1745568056957,
+      "tag": "0000_clear_steel_serpent",
+      "breakpoints": true
+    }
+  ]
 }

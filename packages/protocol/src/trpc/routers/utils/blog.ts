@@ -1,8 +1,6 @@
-/* eslint-disable no-console */
-
 import { z } from "zod";
-import { db } from "database";
-import { blogs, insertBlogSchema } from "database/schema";
+import { db } from "@repo/database";
+import { blogs, insertBlogSchema } from "@repo/database/schema";
 import { eq } from "drizzle-orm";
 import { authedProcedure, router } from "../../trpc";
 import { utapi } from "../../../server/uploadthing";

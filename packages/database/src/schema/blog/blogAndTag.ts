@@ -1,6 +1,6 @@
-import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { relations } from "drizzle-orm";
-import { blogs, blogTags } from "./blog";
+import { sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { blogTags, blogs } from "./blog";
 
 export const blogsAndTags = sqliteTable("blogTagMapping", {
   blogId: text("blog_id")

@@ -1,8 +1,7 @@
-/* eslint-disable no-console */
-import { migrate } from "drizzle-orm/libsql/migrator";
-import { drizzle } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client";
 import { config } from "dotenv";
+import { drizzle } from "drizzle-orm/libsql";
+import { migrate } from "drizzle-orm/libsql/migrator";
 import { z } from "zod";
 
 config();

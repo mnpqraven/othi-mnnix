@@ -1,9 +1,9 @@
-import type { Config } from "drizzle-kit";
 import { env } from "@repo/env";
+import type { Config } from "drizzle-kit";
 
 export default {
-  schema: "schema/*",
-  out: "drizzle",
+  schema: "src/schema/*",
+  out: "src/drizzle",
   dialect: "turso",
   dbCredentials: {
     url: env.DB_URL,

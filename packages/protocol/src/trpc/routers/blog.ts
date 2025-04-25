@@ -192,6 +192,8 @@ async function updateTags(input: { blogId: string; tags: string[] }) {
     db.delete(blogsAndTags).where(eq(blogsAndTags.blogId, input.blogId)),
     db.insert(blogsAndTags).values(insertValues),
   ]);
+  // TODO: clear
+  console.log(_batchQuery.length);
 }
 
 // WARN: why are we using this instead of insertschema
