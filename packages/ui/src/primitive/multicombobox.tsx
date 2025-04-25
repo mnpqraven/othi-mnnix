@@ -1,7 +1,7 @@
 // SOURCE: https://craft.mxkaske.dev/post/fancy-box
 
 import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
-import { cn } from "lib";
+import { cn } from "@repo/lib";
 import { Button, ButtonProps } from "./button";
 import {
   Command,

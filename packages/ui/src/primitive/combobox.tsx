@@ -3,7 +3,7 @@
 import type { ForwardedRef, HTMLAttributes } from "react";
 import { forwardRef, useState } from "react";
 import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
-import { cn } from "lib/utils";
+import { cn } from "@repo/lib";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Button } from "./button";
 import {

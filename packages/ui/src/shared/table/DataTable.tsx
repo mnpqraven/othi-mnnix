@@ -3,7 +3,7 @@ import { flexRender } from "@tanstack/react-table";
 import type { ForwardedRef, HTMLAttributes } from "react";
 import { Fragment, forwardRef } from "react";
 import { Loader2 } from "lucide-react";
-import { cn } from "lib/utils";
+import { cn } from "@repo/lib";
 import {
   Table,
   TableBody,

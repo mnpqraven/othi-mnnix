@@ -1,5 +1,5 @@
 import type { Table } from "@tanstack/react-table";
-import { cn } from "lib/utils";
+import { cn } from "@repo/lib";
 import { Check, Command } from "lucide-react";
 import type { ComponentPropsWithoutRef } from "react";
 import {

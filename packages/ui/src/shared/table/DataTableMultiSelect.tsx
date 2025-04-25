@@ -2,7 +2,7 @@ import type { Column } from "@tanstack/react-table";
 import type { LucideIcon } from "lucide-react";
 import { Check } from "lucide-react";
 import type { ComponentPropsWithoutRef } from "react";
-import { cn } from "lib/utils";
+import { cn } from "@repo/lib";
 import {
   Command,
   CommandEmpty,
