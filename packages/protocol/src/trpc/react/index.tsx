@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-/* eslint-disable no-undef-init */
 // scaffolding from create t3 app
 "use client";
 
