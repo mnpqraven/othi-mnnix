@@ -9,7 +9,7 @@ import {
 } from "@trpc/client";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
-import type { ToastFn } from "ui/primitive/sonner";
+import type { ToastFn } from "@repo/ui/primitive/sonner";
 import type { AppRouter } from "..";
 import { TRPCProvider, createQueryClient, useTRPC } from "./client";
 import { transformer } from "./transformer";

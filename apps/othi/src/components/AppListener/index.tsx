@@ -1,6 +1,6 @@
 "use client";
 
-import { useSetCommandReducer } from "@othi/lib/store";
+import { useSetCommandReducer } from "@repo/lib";
 import { type ReactNode, useCallback, useEffect } from "react";
 import { useViewportInfo } from "./hook";
 
