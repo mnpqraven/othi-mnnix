@@ -1,17 +1,17 @@
 import {
-  forwardRef,
-  useState,
   type ComponentPropsWithoutRef,
   type ReactNode,
+  forwardRef,
+  useState,
 } from "react";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
+  Button,
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Button,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
 } from "../primitive";
 
 interface Prop {
@@ -73,7 +73,7 @@ const InnerPopover = forwardRef<HTMLButtonElement, Prop>(function InnerPopover(
         {children}
       </PopoverTrigger>
       <PopoverContent className="space-y-2">
-        <div className="text-lg font-semibold">
+        <div className="font-semibold text-lg">
           {text?.header ?? "Confirm deletion"}
         </div>
         <div>

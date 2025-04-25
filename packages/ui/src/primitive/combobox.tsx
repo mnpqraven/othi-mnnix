@@ -1,11 +1,9 @@
 "use client";
 
-import type { ForwardedRef, HTMLAttributes } from "react";
-import { forwardRef, useState } from "react";
-import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
 import { cn } from "@repo/lib";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
-import { Button } from "./button";
+import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { Button, type ButtonProps } from "./button";
 import {
   Command,
   CommandEmpty,
@@ -13,9 +11,10 @@ import {
   CommandInput,
   CommandItem,
 } from "./command";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { ScrollArea } from "./scroll-area";
 
-interface Prop<T> extends HTMLAttributes<HTMLButtonElement> {
+interface Prop<T> extends ButtonProps {
   options: T[];
   labelAccessor: (item: T) => string;
   valueAccessor: (item: T) => string;
@@ -26,25 +25,21 @@ interface Prop<T> extends HTMLAttributes<HTMLButtonElement> {
   onValueChange?: (to: string) => void;
   isLoading?: boolean;
 }
-export const Combobox = forwardRef(ComboboxInner);
 
-function ComboboxInner<T>(
-  {
-    options,
-    labelAccessor,
-    valueAccessor,
-    className,
-    onValueChange,
-    value: outerValue,
-    defaultValue = "",
-    isLoading = false,
-    placeholder = "Select...",
-    searchLabel = "Search...",
-    emptyLabel = "No result found.",
-    ...props
-  }: Prop<T>,
-  ref: ForwardedRef<HTMLButtonElement>,
-) {
+export function Combobox<T>({
+  options,
+  labelAccessor,
+  valueAccessor,
+  className,
+  onValueChange,
+  value: outerValue,
+  defaultValue = "",
+  isLoading = false,
+  placeholder = "Select...",
+  searchLabel = "Search...",
+  emptyLabel = "No result found.",
+  ...props
+}: Prop<T>) {
   const [open, setOpen] = useState(false);
   const [stateValue, setValue] = useState(defaultValue);
 
@@ -60,8 +55,6 @@ function ComboboxInner<T>(
         <Button
           aria-expanded={open}
           className={cn("h-full w-full justify-between", className)}
-          ref={ref}
-          role="combobox"
           variant="outline"
           {...props}
         >
@@ -105,7 +98,7 @@ function ComboboxInner<T>(
                   </CommandItem>
                 ))
               ) : (
-                <div className="py-2 flex gap-2">
+                <div className="flex gap-2 py-2">
                   <Loader2 />
                   <span>Loading...</span>
                 </div>

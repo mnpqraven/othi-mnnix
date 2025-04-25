@@ -6,13 +6,13 @@ import {
   ChevronsRight,
 } from "lucide-react";
 import {
+  Button,
+  Input,
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectItem,
-  Input,
-  Button,
+  SelectTrigger,
+  SelectValue,
 } from "../../primitive";
 
 interface Prop<TData> {
@@ -35,7 +35,7 @@ export function DataTablePagination<TData>({
   return (
     <div className="flex items-center justify-between px-2">
       {allowSelect ? (
-        <div className="flex-1 text-sm text-muted-foreground">
+        <div className="flex-1 text-muted-foreground text-sm">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
@@ -44,7 +44,7 @@ export function DataTablePagination<TData>({
       )}
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
-          <p className="text-sm font-medium">Rows per page</p>
+          <p className="font-medium text-sm">Rows per page</p>
           <Select
             // value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value: string) => {
@@ -66,11 +66,11 @@ export function DataTablePagination<TData>({
           </Select>
         </div>
 
-        <div className="flex items-center justify-center text-sm font-medium">
+        <div className="flex items-center justify-center font-medium text-sm">
           Page {pagination.pageIndex + 1} of {total ?? table.getPageCount()}
         </div>
 
-        <div className="flex items-center justify-center gap-2 text-sm font-medium">
+        <div className="flex items-center justify-center gap-2 font-medium text-sm">
           <span className="min-w-max">Go to page</span>
           <Input
             className="w-16"

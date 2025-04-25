@@ -1,9 +1,9 @@
+import { cn } from "@repo/lib";
 import type { Row, Table as TableType } from "@tanstack/react-table";
 import { flexRender } from "@tanstack/react-table";
+import { Loader2 } from "lucide-react";
 import type { ForwardedRef, HTMLAttributes } from "react";
 import { Fragment, forwardRef } from "react";
-import { Loader2 } from "lucide-react";
-import { cn } from "@repo/lib";
 import {
   Table,
   TableBody,

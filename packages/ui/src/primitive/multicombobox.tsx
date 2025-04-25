@@ -1,31 +1,23 @@
 // SOURCE: https://craft.mxkaske.dev/post/fancy-box
 
-import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
 import { cn } from "@repo/lib";
-import { Button, ButtonProps } from "./button";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { cva } from "class-variance-authority";
+import Fuse, { type FuseOptionKey } from "fuse.js";
+import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "./command";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
-import {
-  ElementRef,
+  type HTMLAttributes,
   forwardRef,
-  HTMLAttributes,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import { Badge } from "./badge";
 import { z } from "zod";
-import Fuse, { FuseOptionKey } from "fuse.js";
-import { useVirtualizer } from "@tanstack/react-virtual";
-import { cva } from "class-variance-authority";
+import { Badge } from "./badge";
+import { Button, type ButtonProps } from "./button";
+import { Command, CommandGroup, CommandInput, CommandItem } from "./command";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 function stringSer(val: string | number): string {
   if (typeof val === "string") return val;
@@ -124,6 +116,7 @@ export function MultiCombobox<T>({
     setOpenCombobox(value);
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const searchEngine = useMemo(() => {
     const { label: doSearchLabel, value: doSearchValue } =
       searchOptSchema.parse(searchOpt);
@@ -138,6 +131,7 @@ export function MultiCombobox<T>({
     return new Fuse(options, { keys });
   }, [searchOpt, options]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const filteredOptions = useMemo(() => {
     if (!searchValue.length) return options;
     const searchQuery = searchEngine.search(searchValue);
@@ -149,7 +143,6 @@ export function MultiCombobox<T>({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          role="combobox"
           aria-expanded={openCombobox}
           className={cn(
             "flex w-full justify-between text-foreground",
@@ -234,7 +227,9 @@ function VirtualizedList<T>({
   });
   const itemId = (item: T) => `${valueAccessor(item)}-${labelAccessor(item)}`;
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
+    // @ts-ignore
     parentRef.current?.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -259,24 +254,24 @@ function VirtualizedList<T>({
       >
         {virt.getVirtualItems().map((item) => {
           const isActive = values.some(
-            (e) => e === valueAccessor(filteredOptions[item.index]! /* safe */),
+            (e) => e === valueAccessor(filteredOptions[item.index]),
           );
           return (
             <CommandItem
-              className="absolute left-0 top-0 w-full"
+              className="absolute top-0 left-0 w-full"
               key={item.key}
               style={{
                 height: `${item.size}px`,
                 transform: `translateY(${item.start}px)`,
               }}
-              value={itemId(filteredOptions[item.index]! /* safe */)}
+              value={itemId(filteredOptions[item.index])}
               onSelect={() => {
                 onItemSelect(item.index);
               }}
               disabled={disabled}
             >
               <div className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
-                {labelAccessor(filteredOptions[item.index]! /* safe */)}
+                {labelAccessor(filteredOptions[item.index])}
               </div>
               <Check
                 className={cn(
@@ -323,7 +318,7 @@ function AmountLabel<T>({
     );
 
   if (length === 1) {
-    const text = labelAccessor(filteredOptions[0]!);
+    const text = labelAccessor(filteredOptions[0]);
     return badge ? (
       <Badge className="whitespace-nowrap">{text}</Badge>
     ) : (
@@ -355,27 +350,26 @@ interface LoadingDisplayProp extends HTMLAttributes<HTMLDivElement> {
   dataLength: number;
   emptyLabel?: string;
 }
-const LoadingDisplay = forwardRef<HTMLDivElement, LoadingDisplayProp>(function (
-  { dataLength, isLoading, emptyLabel, className, ...props },
-  ref,
-) {
-  const st = cva(
-    "flex gap-2 justify-center text-muted-foreground items-center p-2",
-  );
-
-  if (isLoading)
-    return (
-      <div {...props} ref={ref} className={st({ className })}>
-        <Loader2 className="h-4 w-4 animate-spin" />
-        Loading...
-      </div>
-    );
-  if (!isLoading && dataLength <= 0)
-    return (
-      <div {...props} ref={ref} className={st({ className })}>
-        {emptyLabel}
-      </div>
+const LoadingDisplay = forwardRef<HTMLDivElement, LoadingDisplayProp>(
+  ({ dataLength, isLoading, emptyLabel, className, ...props }, ref) => {
+    const st = cva(
+      "flex gap-2 justify-center text-muted-foreground items-center p-2",
     );
 
-  return null;
-});
+    if (isLoading)
+      return (
+        <div {...props} ref={ref} className={st({ className })}>
+          <Loader2 className="h-4 w-4 animate-spin" />
+          Loading...
+        </div>
+      );
+    if (!isLoading && dataLength <= 0)
+      return (
+        <div {...props} ref={ref} className={st({ className })}>
+          {emptyLabel}
+        </div>
+      );
+
+    return null;
+  },
+);

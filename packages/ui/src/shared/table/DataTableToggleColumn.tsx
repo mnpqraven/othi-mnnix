@@ -2,13 +2,13 @@ import type { Table } from "@tanstack/react-table";
 import { SlidersHorizontal } from "lucide-react";
 import type { ComponentPropsWithoutRef } from "react";
 import {
+  Button,
   DropdownMenu,
-  DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuCheckboxItem,
-  Button,
+  DropdownMenuTrigger,
 } from "../../primitive";
 
 interface Prop<TData> extends ComponentPropsWithoutRef<typeof Button> {

@@ -1,19 +1,21 @@
-import type { Table } from "@tanstack/react-table";
 import { cn } from "@repo/lib";
+import type { Table } from "@tanstack/react-table";
 import { Check, Command } from "lucide-react";
 import type { ComponentPropsWithoutRef } from "react";
+import { Button } from "../../primitive/button";
 import {
-  CommandInput,
-  CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
+  CommandList,
   CommandSeparator,
-  Button,
+} from "../../primitive/command";
+import {
   Popover,
-  PopoverTrigger,
   PopoverContent,
-} from "../../primitive";
+  PopoverTrigger,
+} from "../../primitive/popover";
 
 interface Prop<TData, TFilter extends string>
   extends ComponentPropsWithoutRef<typeof Button> {
@@ -63,19 +65,17 @@ export function DataTableMultiSelectExpand<TData, TFilter extends string>({
                       const filtered = rows.filter(
                         (row) => row.getValue(columnKey as string) === option,
                       );
-                      if (filtered.every((row) => row.getIsSelected())) {
-                        filtered.forEach((row) => {
-                          row.toggleSelected(false);
-                        });
-                      } else
-                        filtered.forEach((row) => {
-                          row.toggleSelected(true);
-                        });
+                      const nextVal = filtered.every((row) =>
+                        row.getIsSelected(),
+                      );
+                      for (const row of filtered) {
+                        row.toggleSelected(nextVal);
+                      }
                     }}
                   >
                     <div
                       className={cn(
-                        "border-primary mr-2 flex h-4 w-4 items-center justify-center rounded-sm border",
+                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
                         isSelected
                           ? "bg-primary text-primary-foreground"
                           : "opacity-50 [&_svg]:invisible",
