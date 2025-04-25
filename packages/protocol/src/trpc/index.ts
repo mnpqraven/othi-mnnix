@@ -1,6 +1,6 @@
 import "server-only";
 
-import { createCallerFactory, router } from "./trpc";
+import { createCallerFactory, publicProcedure, router } from "./trpc";
 import { othiRouter } from "./routers/othi";
 import { blogUtilsRouter } from "./routers/utils/blog";
 import type { RouterInputs, RouterOutputs } from "./react/client";
@@ -12,6 +12,7 @@ export const appRouter = router({
   },
   blog: blogRouter,
   othi: othiRouter,
+  greet: publicProcedure.query(async () => "hello world!"),
 });
 
 // NOTE: Export type router type signature,

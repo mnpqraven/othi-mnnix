@@ -1,4 +1,3 @@
-import { createTRPCReact } from "@trpc/react-query";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import {
   defaultShouldDehydrateQuery,
@@ -9,8 +8,10 @@ import type { ToastFn } from "ui/primitive/sonner";
 import { toast } from "ui/primitive/sonner";
 import { type AppRouter } from "..";
 import { transformer } from "./transformer";
+import { createTRPCContext as shinyNewTRPCQuery } from "@trpc/tanstack-react-query";
 
-export const trpc = createTRPCReact<AppRouter>();
+export const { TRPCProvider, useTRPC, useTRPCClient } =
+  shinyNewTRPCQuery<AppRouter>();
 
 /**
  * Inference helper for inputs.
