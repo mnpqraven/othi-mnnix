@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/require-await */
-
 import GithubProvider from "next-auth/providers/github";
 import type { NextAuthOptions } from "next-auth";
-import { env } from "env";
+import { env } from "@repo/env";
 
 export const authOptions: NextAuthOptions = {
   secret: env.NEXTAUTH_SECRET,

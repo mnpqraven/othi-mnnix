@@ -1,5 +1,9 @@
 .direnv
 
+# secrets
+.env*
+!.env.example
+
 # compiled output
 dist
 tmp

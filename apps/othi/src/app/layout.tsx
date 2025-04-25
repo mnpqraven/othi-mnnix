@@ -1,6 +1,8 @@
 import "./global.css";
 
+import { GeistSans } from "geist/font/sans";
 import { TRPCReactProvider } from "@repo/protocol/trpc/react";
+import { cn } from "@repo/lib";
 
 export const metadata = {
   title: "Welcome to othi",
@@ -14,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={cn(GeistSans.className)}>
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>

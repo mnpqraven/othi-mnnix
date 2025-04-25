@@ -59,6 +59,9 @@
     },
     {
       "path": "../../packages/env"
+    },
+    {
+      "path": "../../packages/auth"
     }
   ]
 }

@@ -11,8 +11,10 @@ import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
 import type { ToastFn } from "ui/primitive/sonner";
 import { type AppRouter } from "..";
-import { createQueryClient, TRPCProvider } from "./client";
+import { createQueryClient, TRPCProvider, useTRPC } from "./client";
 import { transformer } from "./transformer";
+
+export { useTRPC };
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
 let toastFnSingleton: ToastFn | undefined = undefined;
