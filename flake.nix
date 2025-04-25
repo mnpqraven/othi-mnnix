@@ -29,13 +29,12 @@
         ];
         build_all = pkgs.writeShellScriptBin "build_all" ''
           echo "Running build command on all targets"
-          pnpx nx build othi
+          pnpx nx run-many -t lint,build
         '';
-        # TODO: all targets on nx dev
         # FIXME: pnpx/npx = big bad on load time
         dev_all = pkgs.writeShellScriptBin "dev_all" ''
           echo "Running dev containers on all targets"
-          pnpx nx dev othi
+          pnpx nx run-many -t dev
         '';
         dev_othi = pkgs.writeShellScriptBin "dev_othi" ''
           echo "Running dev containers on target othi"
