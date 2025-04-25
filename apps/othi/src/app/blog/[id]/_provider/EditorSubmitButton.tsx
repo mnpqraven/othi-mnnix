@@ -1,10 +1,10 @@
 "use client";
 
-import { editorTempBlogIdAtom } from "@othi/components/editor/store";
+import { editorTempBlogIdAtom } from "@/components/editor/store";
+import { Button } from "@repo/ui/primitive/button";
 import { useCurrentEditor } from "@tiptap/react";
 import { useAtomValue } from "jotai";
 import { Loader2 } from "lucide-react";
-import { Button } from "ui/primitive";
 import { useBlogForm } from "./BlogFormProvider";
 
 interface Prop {

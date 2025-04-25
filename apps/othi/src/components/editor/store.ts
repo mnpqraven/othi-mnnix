@@ -1,6 +1,6 @@
+import { generateUlid } from "@repo/lib";
 import { atom } from "jotai";
 import { atomWithReset } from "jotai/utils";
-import { generateUlid } from "lib";
 
 export const editorTempBlogIdAtom = atomWithReset<string | undefined>(
   undefined,

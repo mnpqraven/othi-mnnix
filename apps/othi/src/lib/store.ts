@@ -1,7 +1,6 @@
+import { useReducerAtom, useSetReducerAtom } from "@repo/lib/hooks";
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
-import { useReducerAtom } from "lib/hooks/useReducerAtom";
-import { useSetReducerAtom } from "lib/hooks/useSetReducerAtom";
 import {
   type CommandAtomShape,
   commandCenterReducer,

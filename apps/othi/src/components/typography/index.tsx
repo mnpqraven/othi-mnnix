@@ -1,4 +1,4 @@
-import { cn } from "lib";
+import { cn } from "@repo/lib";
 import React from "react";
 
 interface HtmlContentProp {

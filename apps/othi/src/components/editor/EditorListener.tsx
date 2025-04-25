@@ -1,6 +1,6 @@
 "use client";
 
-import { commandAtom } from "@othi/lib/store";
+import { commandAtom } from "@/lib/store";
 import { useCurrentEditor } from "@tiptap/react";
 import { useAtom, useAtomValue } from "jotai";
 import { focusAtom } from "jotai-optics";

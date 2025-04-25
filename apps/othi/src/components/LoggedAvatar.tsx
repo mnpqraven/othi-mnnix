@@ -1,16 +1,14 @@
-import { signOut, useSession } from "next-auth/react";
+import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/primitive/avatar";
+import { Button } from "@repo/ui/primitive/button";
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "ui/primitive";
+} from "@repo/ui/primitive/dropdown-menu";
+import { signOut, useSession } from "next-auth/react";
 
 // TODO: see if this can be a server component
 export function LoggedAvatar() {

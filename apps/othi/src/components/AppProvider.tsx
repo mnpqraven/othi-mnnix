@@ -1,15 +1,15 @@
 "use client";
 
-import { ourFileRouter } from "@othi/app/api/uploadthing/core";
+import { ourFileRouter } from "@/app/api/uploadthing/core";
+import { TRPCReactProvider } from "@repo/protocol/trpc/react";
+import { toast } from "@repo/ui/primitive/sonner";
+import { TooltipProvider } from "@repo/ui/primitive/tooltip";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { Provider } from "jotai";
 import { DevTools } from "jotai-devtools";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
-import { TRPCReactProvider } from "@repo/protocol/trpc/react";
-import { toast } from "@repo/ui/primitive/sonner";
-import { TooltipProvider } from "@repo/ui/primitive/tooltip";
 import { extractRouterConfig } from "uploadthing/server";
 
 interface RootProps {

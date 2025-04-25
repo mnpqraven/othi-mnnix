@@ -1,4 +1,4 @@
-import { isSuperAdmin } from "auth";
+import { isSuperAdmin } from "@repo/auth";
 import { getServerSession } from "next-auth";
 import { type ReactNode, Suspense } from "react";
 

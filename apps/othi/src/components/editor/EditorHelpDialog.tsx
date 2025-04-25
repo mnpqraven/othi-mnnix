@@ -1,11 +1,11 @@
-import { useAtom } from "jotai";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "ui/primitive";
+} from "@repo/ui/primitive/dialog";
+import { useAtom } from "jotai";
 import { editorHelpDialogOpen } from "./store";
 
 const commands = [

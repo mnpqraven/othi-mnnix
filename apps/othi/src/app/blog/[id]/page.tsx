@@ -1,19 +1,20 @@
-import { SudoGuard } from "@othi/components/SudoGuard";
-import { HtmlContent } from "@othi/components/typography";
+import { SudoGuard } from "@/components/SudoGuard";
+import { HtmlContent } from "@/components/typography";
+import type { Params } from "@repo/lib";
+import { caller } from "@repo/protocol/trpc/server";
+import { Button } from "@repo/ui/primitive/button";
+import { Separator } from "@repo/ui/primitive/separator";
 import { format } from "date-fns";
-import type { Params } from "lib/generics";
 import { MoveLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { trpcServer } from "protocol/trpc/react/server";
-import { Button, Separator } from "ui/primitive";
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   // this always runs until completion so loading files might not show up if
   // using the same action
   // TODO: cache the meta queries
   const id = params?.id as string;
-  const data = await trpcServer.blog.byId({ id });
+  const data = await caller.blog.byId({ id });
   const title = data?.meta.title;
   const description = "Othi's blog";
   return {
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function Page({ params }: Params) {
   const id = params?.id as string;
-  const data = await trpcServer.blog.byId({ id });
+  const data = await caller.blog.byId({ id });
 
   if (!data) return "not found";
 

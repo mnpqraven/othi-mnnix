@@ -1,11 +1,11 @@
-import { EditorProvider } from "@othi/components/editor/EditorProvider";
-import { isSuperAdmin } from "auth";
-import type { Params } from "lib/generics";
+import { EditorProvider } from "@/components/editor/EditorProvider";
+import { isSuperAdmin } from "@repo/auth";
+import type { Params } from "@repo/lib";
+import { caller } from "@repo/protocol/trpc/server";
 import { Info, MoveLeft } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { trpcServer } from "protocol/trpc/react/server";
 import { BlogForm } from "../_provider/BlogForm";
 import { BlogFormProvider } from "../_provider/BlogFormProvider";
 import { EditorSubmitButton } from "../_provider/EditorSubmitButton";
@@ -17,7 +17,7 @@ export default async function Page({ params }: Params) {
   if (!isSudo) return redirect("/blog");
 
   const id = params?.id as string;
-  const data = await trpcServer.blog.byId({ id, tags: true });
+  const data = await caller.blog.byId({ id, tags: true });
 
   if (!data) return "not found";
 

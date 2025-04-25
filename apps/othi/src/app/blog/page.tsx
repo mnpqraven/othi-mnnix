@@ -1,10 +1,12 @@
-import { SudoGuard } from "@othi/components/SudoGuard";
+import { SudoGuard } from "@/components/SudoGuard";
+import { cn } from "@repo/lib";
+import { caller } from "@repo/protocol/trpc/server";
+import { Badge } from "@repo/ui/primitive/badge";
+import { Button } from "@repo/ui/primitive/button";
+import { Separator } from "@repo/ui/primitive/separator";
 import { format } from "date-fns";
-import { cn } from "lib";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { trpcServer } from "protocol/trpc/react/server";
-import { Badge, Button, Separator } from "ui/primitive";
 
 export const metadata: Metadata = {
   title: "Othi's blogs",
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const blogs = await trpcServer.blog.listMeta();
+  const blogs = await caller.blog.listMeta();
 
   // TODO: probably better to have a server side filter
   return (

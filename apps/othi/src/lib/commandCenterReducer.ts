@@ -1,4 +1,4 @@
-import type { TypePayloadPairMap } from "lib/generics";
+import type { TypePayloadPairMap } from "@repo/lib";
 
 export interface CommandAtomShape {
   openState: boolean;

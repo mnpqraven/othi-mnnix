@@ -1,4 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@repo/ui/primitive/button";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@repo/ui/primitive/form";
+import { Input } from "@repo/ui/primitive/input";
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+} from "@repo/ui/primitive/popover";
+import { Toggle } from "@repo/ui/primitive/toggle";
 import { useCurrentEditor } from "@tiptap/react";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -25,18 +39,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Button,
-  Form,
-  FormField,
-  FormItem,
-  FormMessage,
-  Input,
-  Popover,
-  PopoverAnchor,
-  PopoverContent,
-  Toggle,
-} from "ui/primitive";
 import { z } from "zod";
 
 export function EditorBold() {

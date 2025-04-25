@@ -4,11 +4,7 @@ import {
   commandSearchInputAtom,
   useCommandReducer,
   useSetCommandReducer,
-} from "@othi/lib/store";
-import { useAtom, useAtomValue } from "jotai";
-import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+} from "@/lib/store";
 import {
   CommandDialog,
   CommandEmpty,
@@ -16,7 +12,11 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "ui/primitive";
+} from "@repo/ui/primitive/command";
+import { useAtom, useAtomValue } from "jotai";
+import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { z } from "zod";
 
 const routeConfSchema = z

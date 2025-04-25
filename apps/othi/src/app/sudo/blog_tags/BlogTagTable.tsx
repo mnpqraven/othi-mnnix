@@ -1,13 +1,15 @@
 "use client";
 
-import { useTable } from "lib";
-import { trpc } from "protocol";
+import { useTable } from "@repo/lib/hooks";
+import { useTRPC } from "@repo/protocol/trpc/react";
+import { DataTable } from "@repo/ui/shared/table/DataTable";
+import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
-import { DataTable } from "ui/shared/table";
 import { blogTagColumns } from "./columns";
 
 export function BlogTagTable() {
-  const { data } = trpc.othi.blogTag.list.useQuery();
+  const trpc = useTRPC();
+  const { data } = useQuery(trpc.othi.blogTag.list.queryOptions());
   const tableData = useMemo(() => data ?? [], [data]);
   const { table } = useTable({
     data: tableData,

@@ -1,21 +1,22 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { BlogTag } from "database/schema";
-import { insertBlogTagSchema } from "database/schema";
-import { trpc } from "protocol";
-import { useForm } from "react-hook-form";
+import type { BlogTag } from "@repo/database/schema";
+import { insertBlogTagSchema } from "@repo/database/schema";
+import { useTRPC } from "@repo/protocol/trpc/react";
+import { Button } from "@repo/ui/primitive/button";
 import {
-  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-} from "ui/primitive";
-import { toast } from "ui/primitive/sonner";
+} from "@repo/ui/primitive/form";
+import { Input } from "@repo/ui/primitive/input";
+import { toast } from "@repo/ui/primitive/sonner";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 
 export function BlogTagForm() {
   const form = useForm<BlogTag>({
@@ -25,14 +26,17 @@ export function BlogTagForm() {
       code: "",
     },
   });
-  const utils = trpc.useUtils();
-  const { mutate } = trpc.othi.blogTag.create.useMutation({
-    onSuccess() {
-      void utils.othi.blogTag.list.invalidate();
-      form.reset();
-      toast("Success");
-    },
-  });
+  const utils = useQueryClient();
+  const trpc = useTRPC();
+  const { mutate } = useMutation(
+    trpc.othi.blogTag.create.mutationOptions({
+      onSuccess() {
+        void utils.invalidateQueries(trpc.othi.blogTag.list.queryFilter());
+        form.reset();
+        toast("Success");
+      },
+    }),
+  );
 
   return (
     <Form {...form}>

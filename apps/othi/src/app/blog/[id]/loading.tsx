@@ -1,6 +1,6 @@
 import { MoveLeft } from "lucide-react";
 import Link from "next/link";
-import { Separator } from "ui/primitive";
+import { Separator } from "@repo/ui/primitive/separator";
 
 export default function Loading() {
   return (

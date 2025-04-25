@@ -28,8 +28,7 @@ interface Props<TData> {
    * @link https://github.com/TanStack/table/issues/4566
    * */
   data: TData[];
-  // biome-ignore lint/suspicious/noExplicitAny: library code
-  columns: ColumnDef<TData, any>[];
+  columns: ColumnDef<TData, unknown>[];
   pageCount?: number;
   initialState?: InitialTableState | undefined;
   columnFilters?: {

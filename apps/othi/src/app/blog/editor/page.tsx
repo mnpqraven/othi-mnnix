@@ -1,4 +1,4 @@
-import { EditorProvider } from "@othi/components/editor/EditorProvider";
+import { EditorProvider } from "@/components/editor/EditorProvider";
 import { Info, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { BlogForm } from "../[id]/_provider/BlogForm";

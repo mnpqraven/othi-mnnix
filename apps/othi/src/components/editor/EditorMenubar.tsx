@@ -1,5 +1,5 @@
+import { cn } from "@repo/lib";
 import { useCurrentEditor } from "@tiptap/react";
-import { cn } from "lib";
 import type { HTMLAttributes } from "react";
 import { forwardRef } from "react";
 import {

@@ -8,6 +8,7 @@
   "exports": {
     "./package.json": "./package.json",
     "./primitive/*": "./src/primitive/*.tsx",
+    "./shared/*": "./src/shared/*.tsx",
     ".": {
       "development": "./src/index.ts",
       "types": "./dist/index.d.ts",

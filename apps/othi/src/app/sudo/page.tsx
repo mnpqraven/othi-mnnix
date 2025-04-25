@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "ui/primitive";
+import { Button } from "@repo/ui/primitive/button";
 
 export default function Page() {
   const routes = [

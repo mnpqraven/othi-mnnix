@@ -1,9 +1,7 @@
 "use client";
 
-import { cn } from "lib";
-import { trpc } from "protocol";
-import type { HTMLAttributes } from "react";
-import { forwardRef } from "react";
+import { cn } from "@repo/lib";
+import { useTRPC } from "@repo/protocol/trpc/react";
 import {
   Form,
   FormControl,
@@ -11,17 +9,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-  MultiCombobox,
-  Switch,
-} from "ui/primitive";
+} from "@repo/ui/primitive/form";
+import { Input } from "@repo/ui/primitive/input";
+import { MultiCombobox } from "@repo/ui/primitive/multicombobox";
+import { Switch } from "@repo/ui/primitive/switch";
+import { useQuery } from "@tanstack/react-query";
+import type { HTMLAttributes } from "react";
+import { forwardRef } from "react";
 import { useBlogForm } from "./BlogFormProvider";
 
 export const BlogForm = forwardRef<
   HTMLFormElement,
   HTMLAttributes<HTMLFormElement>
 >(function BlogForm({ className, ...props }, ref) {
-  const { data = [], isLoading } = trpc.blog.tag.list.useQuery();
+  const trpc = useTRPC();
+  const { data = [], isLoading } = useQuery(trpc.blog.tag.list.queryOptions());
   const { form } = useBlogForm();
 
   return (

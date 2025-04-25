@@ -1,4 +1,4 @@
-import { Button } from "ui/primitive";
+import { Button } from "@repo/ui/primitive/button";
 
 export default function Loading() {
   return (

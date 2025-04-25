@@ -1,4 +1,6 @@
 import "./globals.css";
+// FIXME: merge these 2. new is more correct, old has tiptap classes
+// import "./globals_old.css";
 import "jotai-devtools/styles.css";
 
 import { AppListener } from "@/components/AppListener";
