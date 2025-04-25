@@ -1,14 +1,12 @@
-/* eslint-disable camelcase */
 import "server-only";
-
+import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
+import { unstable_cache } from "next/cache";
 import { cookies, headers } from "next/headers";
 import { cache as reactCache } from "react";
-import { unstable_cache } from "next/cache";
 import { appRouter } from "..";
 import { createTRPCContext } from "../trpc";
 import { createQueryClient } from "./client";
 import { transformer } from "./transformer";
-import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
 
 const createContext = reactCache(async () => {
   const heads = new Headers(await headers());

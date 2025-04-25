@@ -1,9 +1,9 @@
-import { z } from "zod";
 import { db } from "@repo/database";
 import { blogs, insertBlogSchema } from "@repo/database/schema";
 import { eq } from "drizzle-orm";
-import { authedProcedure, router } from "../../trpc";
+import { z } from "zod";
 import { utapi } from "../../../server/uploadthing";
+import { authedProcedure, router } from "../../trpc";
 
 export const blogUtilsRouter = router({
   update: {

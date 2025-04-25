@@ -1,16 +1,15 @@
 "use client";
 
-import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import { type ToastFn, toast } from "@repo/ui/primitive/sonner";
 import {
-  defaultShouldDehydrateQuery,
   QueryClient,
   type QueryClientConfig,
+  defaultShouldDehydrateQuery,
 } from "@tanstack/react-query";
-// import type { ToastFn } from "ui/primitive/sonner";
-// import { toast } from "ui/primitive/sonner";
+import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import { createTRPCContext as shinyNewTRPCQuery } from "@trpc/tanstack-react-query";
 import type { AppRouter } from "..";
 import { transformer } from "./transformer";
-import { createTRPCContext as shinyNewTRPCQuery } from "@trpc/tanstack-react-query";
 
 export const { TRPCProvider, useTRPC, useTRPCClient } =
   shinyNewTRPCQuery<AppRouter>();
@@ -39,7 +38,7 @@ const TANSTACK_OPTIONS = (toastFn?: ToastFn): QueryClientConfig => ({
     },
     mutations: {
       onError(e) {
-        // if (toastFn) toast.error(e.message);
+        if (toastFn) toast.error(e.message);
       },
     },
     dehydrate: {

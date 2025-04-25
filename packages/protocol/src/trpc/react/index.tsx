@@ -1,17 +1,17 @@
 // scaffolding from create t3 app
 "use client";
 
-import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
+import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
+  createTRPCClient,
   httpBatchStreamLink,
   loggerLink,
-  createTRPCClient,
 } from "@trpc/client";
-import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
+import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
 import type { ToastFn } from "ui/primitive/sonner";
-import { type AppRouter } from "..";
-import { createQueryClient, TRPCProvider, useTRPC } from "./client";
+import type { AppRouter } from "..";
+import { TRPCProvider, createQueryClient, useTRPC } from "./client";
 import { transformer } from "./transformer";
 
 export { useTRPC };
@@ -26,6 +26,7 @@ const getQueryClient = (toastFn?: ToastFn) => {
   }
   toastFnSingleton ??= toastFn;
   // Browser: use singleton pattern to keep the same query client
+  // biome-ignore lint/suspicious/noAssignInExpressions: library code
   return (clientQueryClientSingleton ??= createQueryClient(toastFnSingleton));
 };
 
