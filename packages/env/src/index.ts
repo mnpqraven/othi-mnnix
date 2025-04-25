@@ -1,8 +1,8 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { authEnv } from "./auth";
-import { storageEnv } from "./storage";
-import { hostsEnv } from "./hosts";
 import { debugEnv } from "./debug";
+import { hostsEnv } from "./hosts";
+import { storageEnv } from "./storage";
 
 export const env = createEnv({
   server: {},
