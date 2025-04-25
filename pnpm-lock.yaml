@@ -184,6 +184,9 @@ importers:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
     devDependencies:
+      '@libsql/client':
+        specifier: ^0.15.4
+        version: 0.15.4
       '@tailwindcss/postcss':
         specifier: ^4.1.4
         version: 4.1.4
