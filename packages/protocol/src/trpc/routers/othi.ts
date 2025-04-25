@@ -1,5 +1,5 @@
-import { blogTags, insertBlogTagSchema } from "database/schema/blog/blog";
-import { db, LibsqlError } from "database";
+import { blogTags, insertBlogTagSchema } from "@repo/database/schema/blog/blog";
+import { db, LibsqlError } from "@repo/database";
 import { TRPCError } from "@trpc/server";
 import { publicProcedure, router, superAdminProcedure } from "../trpc";
 

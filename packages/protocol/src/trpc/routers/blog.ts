@@ -8,9 +8,9 @@ import {
   insertBlogSchema,
   medias,
   selectBlogSchema,
-} from "database/schema";
+} from "@repo/database/schema";
 import { eq, isNull } from "drizzle-orm";
-import { db, LibsqlError } from "database";
+import { db, LibsqlError } from "@repo/database";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
@@ -18,7 +18,7 @@ import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { generateUlid } from "lib";
+import { generateUlid } from "@repo/lib";
 import { revalidatePath } from "next/cache";
 import { utapi } from "../../server/uploadthing";
 import {
