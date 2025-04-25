@@ -1,5 +1,7 @@
 "use client";
 
+import { useTRPC } from "@repo/protocol/trpc/react";
+import { useMutation } from "@tanstack/react-query";
 import FileHandler from "@tiptap-pro/extension-file-handler";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
@@ -18,8 +20,6 @@ import { EditorListener } from "./EditorListener";
 import { EditorMenubar } from "./EditorMenubar";
 import { EditorPopover } from "./EditorPopover";
 import { editorTempBlogIdAtom } from "./store";
-import { useTRPC } from "@repo/protocol/trpc/react";
-import { useMutation } from "@tanstack/react-query";
 
 type MediaInsert = { mode: "drop"; pos: number } | { mode: "paste" };
 

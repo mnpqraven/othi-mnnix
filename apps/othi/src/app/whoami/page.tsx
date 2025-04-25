@@ -1,10 +1,10 @@
 "use client";
 
 import { useLogin } from "@/lib/auth/hook";
-// TODO:
-import { Github } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/primitive/avatar";
 import { Button } from "@repo/ui/primitive/button";
+// TODO:
+import { Github } from "lucide-react";
 
 export default function Page() {
   const { signIn, signOut, status, data } = useLogin();

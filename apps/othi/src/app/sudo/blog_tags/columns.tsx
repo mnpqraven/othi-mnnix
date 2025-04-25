@@ -1,5 +1,5 @@
+import type { BlogTag } from "@repo/database/schema";
 import { createColumnHelper } from "@tanstack/react-table";
-import type { BlogTag } from "database/schema";
 
 const col = createColumnHelper<BlogTag>();
 

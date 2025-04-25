@@ -1,4 +1,4 @@
-import { COOKIES_KEY } from "lib/constants";
+import { COOKIES_KEY } from "@repo/lib";
 import type { Account } from "next-auth";
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 

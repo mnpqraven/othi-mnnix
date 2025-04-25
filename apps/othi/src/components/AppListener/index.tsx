@@ -1,6 +1,6 @@
 "use client";
 
-import { useSetCommandReducer } from "@repo/lib";
+import { useSetCommandReducer } from "@/lib/store";
 import { type ReactNode, useCallback, useEffect } from "react";
 import { useViewportInfo } from "./hook";
 

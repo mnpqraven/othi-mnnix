@@ -20,6 +20,8 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      // TODO:
+      // @ts-ignore
       if (session.user) session.user.access_token = token.access_token;
       return session;
     },

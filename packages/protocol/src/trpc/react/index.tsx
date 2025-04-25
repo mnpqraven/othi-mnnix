@@ -1,6 +1,7 @@
 // scaffolding from create t3 app
 "use client";
 
+import type { ToastFn } from "@repo/ui/primitive/sonner";
 import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   createTRPCClient,
@@ -9,7 +10,6 @@ import {
 } from "@trpc/client";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
-import type { ToastFn } from "@repo/ui/primitive/sonner";
 import type { AppRouter } from "..";
 import { TRPCProvider, createQueryClient, useTRPC } from "./client";
 import { transformer } from "./transformer";
