@@ -1,5 +1,5 @@
 {
-  "name": "@repo/protocol",
+  "name": "@repo/env",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -13,8 +13,5 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     }
-  },
-  "dependencies": {
-    "@repo/env": "workspace:*"
   }
 }

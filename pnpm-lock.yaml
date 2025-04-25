@@ -147,6 +147,9 @@ importers:
 
   apps/othi:
     dependencies:
+      '@repo/env':
+        specifier: workspace:*
+        version: link:../../packages/env
       '@repo/protocol':
         specifier: workspace:^
         version: link:../../packages/protocol
@@ -160,7 +163,13 @@ importers:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
 
-  packages/protocol: {}
+  packages/env: {}
+
+  packages/protocol:
+    dependencies:
+      '@repo/env':
+        specifier: workspace:*
+        version: link:../env
 
 packages:
 

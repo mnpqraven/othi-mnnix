@@ -6,6 +6,7 @@
     "name": "othi"
   },
   "dependencies": {
+    "@repo/env": "workspace:*",
     "@repo/protocol": "workspace:^",
     "next": "~15.2.4",
     "react": "19.0.0",

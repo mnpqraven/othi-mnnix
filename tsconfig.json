@@ -8,6 +8,9 @@
     },
     {
       "path": "./apps/othi"
+    },
+    {
+      "path": "./packages/env"
     }
   ]
 }
