@@ -1,6 +1,6 @@
 import type { getServerSession } from "next-auth";
 import type { NextRequestWithAuth } from "next-auth/middleware";
-import { env } from "env";
+import { env } from "@repo/env";
 import { authOptions } from "./authOptions";
 
 const DEV = env.DEBUG_AUTH;

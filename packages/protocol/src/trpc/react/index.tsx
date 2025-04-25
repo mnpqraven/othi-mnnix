@@ -1,16 +1,20 @@
-/* eslint-disable camelcase */
-/* eslint-disable no-undef-init */
 // scaffolding from create t3 app
 "use client";
 
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
-import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
+import {
+  httpBatchStreamLink,
+  loggerLink,
+  createTRPCClient,
+} from "@trpc/client";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
 import type { ToastFn } from "ui/primitive/sonner";
 import { type AppRouter } from "..";
-import { createQueryClient, trpc } from "./client";
+import { createQueryClient, TRPCProvider, useTRPC } from "./client";
 import { transformer } from "./transformer";
+
+export { useTRPC };
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
 let toastFnSingleton: ToastFn | undefined = undefined;
@@ -46,14 +50,14 @@ export function TRPCReactProvider(props: {
   const queryClient = getQueryClient(props.toastFn);
 
   const [trpcClient] = useState(() =>
-    trpc.createClient({
+    createTRPCClient<AppRouter>({
       links: [
         loggerLink({
           enabled: (op) =>
             process.env.NODE_ENV === "development" ||
             (op.direction === "down" && op.result instanceof Error),
         }),
-        unstable_httpBatchStreamLink({
+        httpBatchStreamLink({
           transformer,
           url: `${getBaseUrl()}/api/trpc`,
           headers: () => ({
@@ -66,9 +70,9 @@ export function TRPCReactProvider(props: {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <TRPCProvider trpcClient={trpcClient} queryClient={queryClient}>
         {props.children}
-      </trpc.Provider>
+      </TRPCProvider>
     </QueryClientProvider>
   );
 }

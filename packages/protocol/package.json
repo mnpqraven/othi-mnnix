@@ -7,6 +7,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     "./package.json": "./package.json",
+    "./trpc": "./src/trpc/index.ts",
+    "./trpc/react": "./src/trpc/react/index.tsx",
+    "./trpc/server": "./src/trpc/react/server.ts",
     ".": {
       "development": "./src/index.ts",
       "types": "./dist/index.d.ts",
@@ -34,6 +37,7 @@
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
+    "server-only": "^0.0.1",
     "superjson": "^2.2.2",
     "turndown": "^7.2.0",
     "uploadthing": "^7.6.0",
