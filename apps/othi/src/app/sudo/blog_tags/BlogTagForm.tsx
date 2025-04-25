@@ -69,7 +69,9 @@ export function BlogTagForm() {
           )}
         />
 
-        <Button className="mt-8" type="submit">Create</Button>
+        <Button className="mt-8" type="submit">
+          Create
+        </Button>
       </form>
     </Form>
   );

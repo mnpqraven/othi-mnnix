@@ -1,8 +1,8 @@
 "use client";
 
-import { Button, Avatar, AvatarImage, AvatarFallback } from "ui/primitive";
 import { useLogin } from "@othi/lib/auth/hook";
 import { Github } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage, Button } from "ui/primitive";
 
 export default function Page() {
   const { signIn, signOut, status, data } = useLogin();

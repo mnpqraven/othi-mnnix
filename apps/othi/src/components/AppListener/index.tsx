@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, type ReactNode } from "react";
 import { useSetCommandReducer } from "@othi/lib/store";
+import { type ReactNode, useCallback, useEffect } from "react";
 import { useViewportInfo } from "./hook";
 
 export function AppListener({ children }: { children: ReactNode }) {

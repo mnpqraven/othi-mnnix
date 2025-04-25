@@ -1,18 +1,18 @@
 "use client";
 
-import { ThemeProvider } from "next-themes";
-import { TooltipProvider } from "ui/primitive/tooltip";
+import { ourFileRouter } from "@othi/app/api/uploadthing/core";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Provider } from "jotai";
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { Provider } from "jotai";
 import { DevTools } from "jotai-devtools";
+import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "next-themes";
 import { TRPCReactProvider } from "protocol/trpc/react";
 import { transformer } from "protocol/trpc/react/transformer";
-import { SessionProvider } from "next-auth/react";
 import { toast } from "ui/primitive/sonner";
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { TooltipProvider } from "ui/primitive/tooltip";
 import { extractRouterConfig } from "uploadthing/server";
-import { ourFileRouter } from "@othi/app/api/uploadthing/core";
 
 interface RootProps {
   children: React.ReactNode;

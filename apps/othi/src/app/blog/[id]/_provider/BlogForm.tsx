@@ -1,5 +1,9 @@
 "use client";
 
+import { cn } from "lib";
+import { trpc } from "protocol";
+import type { HTMLAttributes } from "react";
+import { forwardRef } from "react";
 import {
   Form,
   FormControl,
@@ -11,10 +15,6 @@ import {
   MultiCombobox,
   Switch,
 } from "ui/primitive";
-import { trpc } from "protocol";
-import type { HTMLAttributes } from "react";
-import { forwardRef } from "react";
-import { cn } from "lib";
 import { useBlogForm } from "./BlogFormProvider";
 
 export const BlogForm = forwardRef<
@@ -74,7 +74,7 @@ export const BlogForm = forwardRef<
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Published</FormLabel>
-                <div className="h-10 flex items-center">
+                <div className="flex h-10 items-center">
                   <FormControl>
                     <Switch
                       checked={field.value ?? undefined}

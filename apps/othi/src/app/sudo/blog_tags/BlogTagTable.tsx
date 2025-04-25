@@ -1,9 +1,9 @@
 "use client";
 
 import { useTable } from "lib";
-import { DataTable } from "ui/shared/table";
 import { trpc } from "protocol";
 import { useMemo } from "react";
+import { DataTable } from "ui/shared/table";
 import { blogTagColumns } from "./columns";
 
 export function BlogTagTable() {

@@ -1,12 +1,12 @@
 import { SudoGuard } from "@othi/components/SudoGuard";
+import { HtmlContent } from "@othi/components/typography";
+import { format } from "date-fns";
 import type { Params } from "lib/generics";
 import { MoveLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { trpcServer } from "protocol/trpc/react/server";
 import { Button, Separator } from "ui/primitive";
-import { HtmlContent } from "@othi/components/typography";
-import type { Metadata } from "next";
-import { format } from "date-fns";
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   // this always runs until completion so loading files might not show up if
@@ -47,7 +47,7 @@ export default async function Page({ params }: Params) {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <Link
-          className="text-muted-foreground flex items-center gap-2 hover:underline"
+          className="flex items-center gap-2 text-muted-foreground hover:underline"
           href="/blog"
         >
           <MoveLeft className="h-4 w-4" />
@@ -62,7 +62,7 @@ export default async function Page({ params }: Params) {
       </div>
 
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold capitalize">{meta.title}</h1>
+        <h1 className="font-semibold text-2xl capitalize">{meta.title}</h1>
 
         <span className="text-muted-foreground text-sm">
           Published at {format(meta.createdAt, "PPP")}

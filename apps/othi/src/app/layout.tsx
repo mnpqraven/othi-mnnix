@@ -1,8 +1,8 @@
 import "./global.css";
 
-import { GeistSans } from "geist/font/sans";
-import { TRPCReactProvider } from "@repo/protocol/trpc/react";
 import { cn } from "@repo/lib";
+import { TRPCReactProvider } from "@repo/protocol/trpc/react";
+import { GeistSans } from "geist/font/sans";
 
 export const metadata = {
   title: "Welcome to othi",

@@ -3,8 +3,8 @@
 import { commandAtom } from "@othi/lib/store";
 import { useCurrentEditor } from "@tiptap/react";
 import { useAtom, useAtomValue } from "jotai";
-import { useEffect, useMemo } from "react";
 import { focusAtom } from "jotai-optics";
+import { useEffect, useMemo } from "react";
 import { editorHelpDialogOpen } from "./store";
 
 /**

@@ -1,6 +1,6 @@
+import { COOKIES_KEY } from "lib/constants";
 import type { Account } from "next-auth";
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
-import { COOKIES_KEY } from "lib/constants";
 
 export function saveGhCookie(
   account: Account,

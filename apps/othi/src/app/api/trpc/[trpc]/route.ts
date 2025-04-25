@@ -1,10 +1,10 @@
-import { cookies } from "next/headers";
-import type { NextRequest } from "next/server";
 import {
   appRouter,
   createTRPCContext,
   fetchRequestHandler,
 } from "@repo/protocol/trpc";
+import { cookies } from "next/headers";
+import type { NextRequest } from "next/server";
 
 const handler = (req: NextRequest) =>
   fetchRequestHandler({

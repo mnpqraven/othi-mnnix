@@ -1,11 +1,11 @@
 "use client";
 
 import { cn } from "lib";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { HTMLAttributes } from "react";
 import { forwardRef } from "react";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useViewportInfo } from "./AppListener/hook";
 import { LoggedAvatar } from "./LoggedAvatar";
 
@@ -33,7 +33,7 @@ export const Navbar = forwardRef<
       style={{ height: `${HEADER_HEIGHT}px` }}
       {...props}
     >
-      <div className="flex gap-2 font-mono text-2xl font-bold">
+      <div className="flex gap-2 font-bold font-mono text-2xl">
         <span>{truncatedPath.toUpperCase()}</span>
         {(status === "authenticated" ? adminRoutes : ["/blog"]).map((route) => (
           <Link href={route} key={route}>

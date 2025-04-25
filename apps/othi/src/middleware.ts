@@ -1,7 +1,7 @@
+import { isSuperAdmin } from "@repo/auth";
 import { withAuth } from "next-auth/middleware";
 import type { NextRequestWithAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
-import { isSuperAdmin } from "@repo/auth";
 
 async function middleware(req: NextRequestWithAuth) {
   const { nextauth, url } = req;

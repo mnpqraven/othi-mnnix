@@ -1,6 +1,6 @@
-import { getServerSession } from "next-auth";
 import { isSuperAdmin } from "auth";
-import { Suspense, type ReactNode } from "react";
+import { getServerSession } from "next-auth";
+import { type ReactNode, Suspense } from "react";
 
 interface Prop {
   children: ReactNode;

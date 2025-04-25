@@ -4,7 +4,7 @@ export default function Loading() {
   return (
     <div className="flex flex-col gap-4">
       <Button
-        className="w-full justify-between p-4 animate-pulse"
+        className="w-full animate-pulse justify-between p-4"
         variant="outline"
       >
         Loading...

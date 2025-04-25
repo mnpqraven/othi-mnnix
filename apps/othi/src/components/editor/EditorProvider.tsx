@@ -1,25 +1,25 @@
 "use client";
 /* eslint-disable import/no-named-as-default */
 
-import { type ComponentProps, type ReactNode } from "react";
+import FileHandler from "@tiptap-pro/extension-file-handler";
+import Image from "@tiptap/extension-image";
+import Link from "@tiptap/extension-link";
+import Subscript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
+import TextAlign from "@tiptap/extension-text-align";
+import Underline from "@tiptap/extension-underline";
 import type { Editor, Extensions } from "@tiptap/react";
 import { EditorProvider as PrimitiveProvider } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
-import Subscript from "@tiptap/extension-subscript";
-import Superscript from "@tiptap/extension-superscript";
-import Image from "@tiptap/extension-image";
-import TextAlign from "@tiptap/extension-text-align";
-import FileHandler from "@tiptap-pro/extension-file-handler";
-import Link from "@tiptap/extension-link";
 import { cva } from "class-variance-authority";
-import { trpc } from "protocol";
 import { useAtomValue } from "jotai";
-import { EditorMenubar } from "./EditorMenubar";
+import { trpc } from "protocol";
+import type { ComponentProps, ReactNode } from "react";
+import { EditorHelpDialog } from "./EditorHelpDialog";
 import { EditorListener } from "./EditorListener";
+import { EditorMenubar } from "./EditorMenubar";
 import { EditorPopover } from "./EditorPopover";
 import { editorTempBlogIdAtom } from "./store";
-import { EditorHelpDialog } from "./EditorHelpDialog";
 
 type MediaInsert = { mode: "drop"; pos: number } | { mode: "paste" };
 
@@ -30,7 +30,7 @@ function useExtensions() {
   function editorMediaInsert(editor: Editor, files: File[], opt: MediaInsert) {
     if (tempBlogId) uploadTempImage({ files, tempBlogId });
 
-    files.forEach((file) => {
+    for (const file of files) {
       const fileReader = new FileReader();
 
       fileReader.readAsDataURL(file);
@@ -44,7 +44,7 @@ function useExtensions() {
           .focus()
           .run();
       };
-    });
+    }
   }
 
   const extensions: Extensions = [

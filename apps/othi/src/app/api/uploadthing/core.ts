@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-throw-literal */
 /* eslint-disable no-console */
-import { createUploadthing, type FileRouter } from "uploadthing/next";
+import { type FileRouter, createUploadthing } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
 const f = createUploadthing();
 
 // Fake auth function
 // eslint-disable-next-line @typescript-eslint/require-await
-async function auth(req: Request): Promise<{ id: string } | undefined> {
+async function auth(_req: Request): Promise<{ id: string } | undefined> {
   return { id: "fakeId" };
 }
 

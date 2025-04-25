@@ -1,7 +1,7 @@
 import { useCurrentEditor } from "@tiptap/react";
+import { cn } from "lib";
 import type { HTMLAttributes } from "react";
 import { forwardRef } from "react";
-import { cn } from "lib";
 import {
   EditorBlockquote,
   EditorBold,
@@ -27,7 +27,7 @@ export const EditorMenubar = forwardRef<
   return (
     <div
       className={cn(
-        "bg-background flex gap-2 rounded-md border p-1",
+        "flex gap-2 rounded-md border bg-background p-1",
         className,
       )}
       {...props}

@@ -5,9 +5,9 @@ import { Separator } from "ui/primitive";
 export default function Loading() {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <Link
-          className="flex gap-2 items-center hover:underline text-muted-foreground"
+          className="flex items-center gap-2 text-muted-foreground hover:underline"
           href="/blog"
         >
           <MoveLeft className="h-4 w-4" />
@@ -16,7 +16,7 @@ export default function Loading() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="text-2xl font-semibold capitalize animate-pulse">
+        <span className="animate-pulse font-semibold text-2xl capitalize">
           Loading...
         </span>
 

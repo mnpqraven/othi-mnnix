@@ -14,6 +14,7 @@ export function HtmlContent({
   return (
     <div
       className={cn(className, markdown ? "markdown" : null)}
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: controlled html injection env
       dangerouslySetInnerHTML={{ __html: contentHtml }}
     />
   );

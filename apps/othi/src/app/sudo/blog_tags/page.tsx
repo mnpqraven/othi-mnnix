@@ -1,5 +1,5 @@
-import { BlogTagTable } from "./BlogTagTable";
 import { BlogTagForm } from "./BlogTagForm";
+import { BlogTagTable } from "./BlogTagTable";
 
 export default async function Page() {
   return (

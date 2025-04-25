@@ -1,11 +1,11 @@
+import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 import { useReducerAtom } from "lib/hooks/useReducerAtom";
 import { useSetReducerAtom } from "lib/hooks/useSetReducerAtom";
-import { atom } from "jotai";
 import {
+  type CommandAtomShape,
   commandCenterReducer,
   defaultCommandAtom,
-  type CommandAtomShape,
 } from "./commandCenterReducer";
 
 export const commandAtom = atom<CommandAtomShape>(defaultCommandAtom);

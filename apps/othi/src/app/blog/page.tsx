@@ -1,10 +1,10 @@
 import { SudoGuard } from "@othi/components/SudoGuard";
-import Link from "next/link";
-import { Badge, Button, Separator } from "ui/primitive";
-import { trpcServer } from "protocol/trpc/react/server";
-import type { Metadata } from "next";
 import { format } from "date-fns";
 import { cn } from "lib";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { trpcServer } from "protocol/trpc/react/server";
+import { Badge, Button, Separator } from "ui/primitive";
 
 export const metadata: Metadata = {
   title: "Othi's blogs",
@@ -30,13 +30,13 @@ export default async function Page() {
           <Link href={`/blog/${id}`} key={id}>
             <Button
               className={cn(
-                "w-full flex-col p-4 flex items-start h-fit",
-                "md:flex-row md:justify-between md:items-center",
+                "flex h-fit w-full flex-col items-start p-4",
+                "md:flex-row md:items-center md:justify-between",
               )}
               variant="outline"
             >
               <span className="capitalize">{title}</span>
-              <div className="flex gap-2 items-center">
+              <div className="flex items-center gap-2">
                 {!publish ? (
                   <>
                     <Badge>Draft</Badge>

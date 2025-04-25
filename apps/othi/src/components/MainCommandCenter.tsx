@@ -6,6 +6,7 @@ import {
   useSetCommandReducer,
 } from "@othi/lib/store";
 import { useAtom, useAtomValue } from "jotai";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import {
@@ -17,7 +18,6 @@ import {
   CommandList,
 } from "ui/primitive";
 import { z } from "zod";
-import { useTheme } from "next-themes";
 
 const routeConfSchema = z
   .object({

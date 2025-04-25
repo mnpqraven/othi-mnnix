@@ -1,4 +1,30 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useCurrentEditor } from "@tiptap/react";
+import type { LucideIcon } from "lucide-react";
+import {
+  Bold,
+  Check,
+  Code,
+  Heading,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Italic,
+  Link,
+  List,
+  ListOrdered,
+  Redo,
+  Strikethrough,
+  Subscript,
+  Superscript,
+  TextQuote,
+  Underline,
+  Undo,
+  X,
+} from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   Button,
   Form,
@@ -11,32 +37,6 @@ import {
   PopoverContent,
   Toggle,
 } from "ui/primitive";
-import type { LucideIcon } from "lucide-react";
-import {
-  Bold,
-  Check,
-  Code,
-  Heading,
-  Heading1,
-  Heading3,
-  Heading4,
-  Italic,
-  Link,
-  Strikethrough,
-  Subscript,
-  Superscript,
-  Underline,
-  Undo,
-  X,
-  Heading2,
-  List,
-  ListOrdered,
-  Redo,
-  TextQuote,
-} from "lucide-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 export function EditorBold() {
