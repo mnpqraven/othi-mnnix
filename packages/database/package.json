@@ -17,7 +17,7 @@
     }
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "biome check",
     "start": "docker kill $(docker ps -qf expose=4010) 2> /dev/null || echo 'No container running on port 4010' && docker run -p 4010:8080 -d -v sqld-data:/var/lib/sqld ghcr.io/libsql/sqld:latest",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "npx tsx ./migrate.ts",
