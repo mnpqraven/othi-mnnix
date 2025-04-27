@@ -34,11 +34,9 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-        env:
-          TIPTAP_PRO_TOKEN: ${{secrets.TIPTAP_PRO_TOKEN}}
       - run: |
           pnpm config set "@tiptap-pro:registry" https://registry.tiptap.dev/
-          pnpm config set "//registry.tiptap.dev/:_authToken" $TIPTAP_PRO_TOKEN
+          pnpm config set "//registry.tiptap.dev/:_authToken" ${{secrets.TIPTAP_PRO_TOKEN}}
           pnpm install --frozen-lockfile
       - uses: nrwl/nx-set-shas@v4
 
