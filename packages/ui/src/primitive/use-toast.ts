@@ -140,7 +140,6 @@ type Toast = Omit<ToasterToast, "id">;
 function toast({ ...props }: Toast) {
   const id = genId();
 
-  // eslint-disable-next-line @typescript-eslint/no-shadow
   const update = (props: ToasterToast) => {
     dispatch({
       type: "UPDATE_TOAST",
