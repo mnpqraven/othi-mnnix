@@ -1,8 +1,11 @@
 // scaffolding from create t3 app
 "use client";
 
-import type { ToastFn } from "@repo/ui/primitive/sonner";
-import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  type QueryClient,
+  type QueryClientConfig,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import {
   createTRPCClient,
   httpBatchStreamLink,
@@ -17,17 +20,17 @@ import { transformer } from "./transformer";
 export { useTRPC };
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
-let toastFnSingleton: ToastFn | undefined = undefined;
+let queryConf: QueryClientConfig | undefined = undefined;
 
-const getQueryClient = (toastFn?: ToastFn) => {
+const getQueryClient = (conf?: QueryClientConfig) => {
   if (typeof window === "undefined") {
     // Server: always make a new query client
     return createQueryClient();
   }
-  toastFnSingleton ??= toastFn;
+  queryConf ??= conf;
   // Browser: use singleton pattern to keep the same query client
   // biome-ignore lint/suspicious/noAssignInExpressions: library code
-  return (clientQueryClientSingleton ??= createQueryClient(toastFnSingleton));
+  return (clientQueryClientSingleton ??= createQueryClient(queryConf));
 };
 
 /**
@@ -46,9 +49,9 @@ export type RouterOutputs = inferRouterOutputs<AppRouter>;
 
 export function TRPCReactProvider(props: {
   children: React.ReactNode;
-  toastFn?: ToastFn;
+  conf?: QueryClientConfig;
 }) {
-  const queryClient = getQueryClient(props.toastFn);
+  const queryClient = getQueryClient(props.conf);
 
   const [trpcClient] = useState(() =>
     createTRPCClient<AppRouter>({

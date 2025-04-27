@@ -360,9 +360,6 @@ importers:
       '@repo/lib':
         specifier: workspace:*
         version: link:../lib
-      '@repo/ui':
-        specifier: workspace:*
-        version: link:../ui
       '@tanstack/react-query':
         specifier: ^5.74.4
         version: 5.74.4(react@19.0.0)
@@ -7032,6 +7029,7 @@ packages:
     resolution: {integrity: sha512-Quz3MvAwHxVYNXsOByL7xI5EB2WYOeFswqaHIA3qOK3isRWTxiplBEocmmru6XmxDB2L7jDNYtYA4FyimoAFEw==}
     engines: {node: '>=8.17.0'}
     hasBin: true
+    bundledDependencies: []
 
   jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -7108,7 +7106,6 @@ packages:
 
   libsql@0.5.8:
     resolution: {integrity: sha512-+OopMI1wM/NvAJTHf3O3+beHd1YfKLnSVsOGBl3/7UBDZ4ydVadkbBk5Hjjs9d3ALC5rBaftMY59AvwyC8MzPw==}
-    cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
   license-webpack-plugin@4.0.2:

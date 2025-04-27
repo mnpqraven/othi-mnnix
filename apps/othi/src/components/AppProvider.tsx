@@ -4,6 +4,7 @@ import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { TRPCReactProvider } from "@repo/protocol/trpc/react";
 import { toast } from "@repo/ui/primitive/sonner";
 import { TooltipProvider } from "@repo/ui/primitive/tooltip";
+import type { QueryClientConfig } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { Provider } from "jotai";
@@ -16,12 +17,22 @@ interface RootProps {
   children: React.ReactNode;
 }
 
+const partialConfWithToast: QueryClientConfig = {
+  defaultOptions: {
+    mutations: {
+      onError(e) {
+        toast.error(e.message);
+      },
+    },
+  },
+};
+
 export function AppProvider({ children }: RootProps) {
   return (
     <SessionProvider>
       <ThemeProvider attribute="class">
         <TooltipProvider delayDuration={300}>
-          <TRPCReactProvider toastFn={toast}>
+          <TRPCReactProvider conf={partialConfWithToast}>
             <Provider>
               <NextSSRPlugin
                 /**

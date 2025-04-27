@@ -1,6 +1,5 @@
 "use client";
 
-import { type ToastFn, toast } from "@repo/ui/primitive/sonner";
 import {
   QueryClient,
   type QueryClientConfig,
@@ -28,29 +27,33 @@ export type RouterInputs = inferRouterInputs<AppRouter>;
  */
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
 
-const TANSTACK_OPTIONS = (toastFn?: ToastFn): QueryClientConfig => ({
+const TANSTACK_OPTIONS = (conf?: QueryClientConfig): QueryClientConfig => ({
   defaultOptions: {
     queries: {
       // With SSR, we usually want to set some default staleTime
       // above 0 to avoid refetching immediately on the client
       staleTime: 30 * 1000,
       refetchOnWindowFocus: false,
+      ...conf?.defaultOptions?.queries,
     },
     mutations: {
-      onError(e) {
-        if (toastFn) toast.error(e.message);
-      },
+      ...conf?.defaultOptions?.mutations,
     },
     dehydrate: {
       serializeData: transformer.serialize,
       shouldDehydrateQuery: (query) =>
         defaultShouldDehydrateQuery(query) || query.state.status === "pending",
+      ...conf?.defaultOptions?.dehydrate,
     },
     hydrate: {
       deserializeData: transformer.deserialize,
+      ...conf?.defaultOptions?.hydrate,
     },
+    ...conf?.defaultOptions,
   },
+  ...conf?.mutationCache,
+  ...conf?.queryCache,
 });
 
-export const createQueryClient = (toastFn?: ToastFn) =>
-  new QueryClient(TANSTACK_OPTIONS(toastFn));
+export const createQueryClient = (conf?: QueryClientConfig) =>
+  new QueryClient(TANSTACK_OPTIONS(conf));
