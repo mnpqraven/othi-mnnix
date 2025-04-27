@@ -27,6 +27,7 @@
   },
   "include": [
     "../../apps/othi/.next/types/**/*.ts",
+    "../../packages/**/*/types/**/*.ts",
     "../../dist/apps/othi/.next/types/**/*.ts",
     "next-env.d.ts",
     "src/**/*.js",
@@ -49,10 +50,22 @@
   ],
   "references": [
     {
+      "path": "../../packages/ui"
+    },
+    {
       "path": "../../packages/protocol"
     },
     {
+      "path": "../../packages/lib"
+    },
+    {
       "path": "../../packages/env"
+    },
+    {
+      "path": "../../packages/database"
+    },
+    {
+      "path": "../../packages/auth"
     }
   ]
 }

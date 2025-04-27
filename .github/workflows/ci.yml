@@ -13,6 +13,14 @@ permissions:
 jobs:
   main:
     runs-on: ubuntu-latest
+    env:
+      NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
+      OAUTH_OTHI_GITHUB_ID: ${{secrets.OAUTH_OTHI_GITHUB_ID}}
+      OAUTH_OTHI_GITHUB_SECRET: ${{secrets.OAUTH_OTHI_GITHUB_SECRET}}
+      OAUTH_GITHUB_SUDO_IDENT: ${{secrets.OAUTH_GITHUB_SUDO_IDENT}}
+      DB_URL: ${{secrets.DB_URL}}
+      DB_AUTH_TOKEN: ${{secrets.DB_AUTH_TOKEN}}
+      UPLOADTHING_TOKEN: ${{secrets.UPLOADTHING_TOKEN}}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,8 +42,10 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-
-      - run: pnpm install --frozen-lockfile
+      - run: |
+          pnpm config set "@tiptap-pro:registry" https://registry.tiptap.dev/
+          pnpm config set "//registry.tiptap.dev/:_authToken" ${{secrets.TIPTAP_PRO_TOKEN}}
+          pnpm install --frozen-lockfile
       - uses: nrwl/nx-set-shas@v4
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud

@@ -27,15 +27,26 @@
         scripts = [
           (mkScript "nx" ''pnpx nx "$@"'')
         ];
+
+        setup_tiptap = pkgs.writeShellScriptBin "setup_tiptap" ''
+          if [ -z $TIPTAP_PRO_TOKEN ]
+            then
+              echo "TIPTAP_PRO_TOKEN not set";
+              exit 1;
+            else
+              pnpm config set "@tiptap-pro:registry" https://registry.tiptap.dev/
+              pnpm config set "//registry.tiptap.dev/:_authToken" $TIPTAP_PRO_TOKEN
+              echo "tiptap token installed"
+          fi
+        '';
         build_all = pkgs.writeShellScriptBin "build_all" ''
           echo "Running build command on all targets"
-          pnpx nx build othi
+          pnpx nx run-many -t lint,build
         '';
-        # TODO: all targets on nx dev
         # FIXME: pnpx/npx = big bad on load time
         dev_all = pkgs.writeShellScriptBin "dev_all" ''
           echo "Running dev containers on all targets"
-          pnpx nx dev othi
+          pnpx nx run-many -t dev
         '';
         dev_othi = pkgs.writeShellScriptBin "dev_othi" ''
           echo "Running dev containers on target othi"
@@ -47,7 +58,12 @@
         # INFO: nix build
         # TODO:
         packages = {
-          inherit build_all dev_all dev_othi;
+          inherit
+            build_all
+            dev_all
+            dev_othi
+            setup_tiptap
+            ;
         };
 
         # INFO: nix run
@@ -65,6 +81,10 @@
           dev_othi = {
             type = "app";
             program = "${self.packages.${system}.dev_othi}/bin/dev_othi";
+          };
+          setup_tiptap = {
+            type = "app";
+            program = "${self.packages.${system}.setup_tiptap}/bin/setup_tiptap";
           };
         };
 

@@ -11,6 +11,18 @@
     },
     {
       "path": "./packages/env"
+    },
+    {
+      "path": "./packages/ui"
+    },
+    {
+      "path": "./packages/lib"
+    },
+    {
+      "path": "./packages/auth"
+    },
+    {
+      "path": "./packages/database"
     }
   ]
 }
