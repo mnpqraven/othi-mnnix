@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - cicd
   pull_request:
 
 permissions:
@@ -34,8 +34,10 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-
-      - run: pnpm install --frozen-lockfile
+      - run: |
+          pnpm config set "@tiptap-pro:registry" https://registry.tiptap.dev/
+          pnpm config set "//registry.tiptap.dev/:_authToken" ${{secrets.TIPTAP_PRO_TOKEN}}
+          pnpm install --frozen-lockfile
       - uses: nrwl/nx-set-shas@v4
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
