@@ -1,4 +1,4 @@
-import type { DottedPaths } from "lib/generics";
+import type { DottedPaths } from "@repo/lib";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { FormControl, FormField, FormItem, FormLabel } from "../form";
 import { Switch } from "../switch";

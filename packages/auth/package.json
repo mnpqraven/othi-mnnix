@@ -10,5 +10,10 @@
       "default": "./src/index.ts"
     },
     "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@repo/env": "workspace:*",
+    "next-auth": "^4.24.11",
+    "zod": "^3.24.3"
   }
 }

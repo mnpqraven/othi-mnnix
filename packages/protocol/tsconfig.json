@@ -3,7 +3,19 @@
   "include": [],
   "references": [
     {
+      "path": "../ui"
+    },
+    {
+      "path": "../lib"
+    },
+    {
       "path": "../env"
+    },
+    {
+      "path": "../database"
+    },
+    {
+      "path": "../auth"
     },
     {
       "path": "./tsconfig.lib.json"

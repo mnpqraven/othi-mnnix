@@ -8,7 +8,11 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
@@ -19,7 +23,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
     "outDir": "dist",
     "rootDir": "src",
@@ -27,6 +33,7 @@
   },
   "include": [
     "../../apps/othi/.next/types/**/*.ts",
+    "../../packages/**/*/types/**/*.ts",
     "../../dist/apps/othi/.next/types/**/*.ts",
     "next-env.d.ts",
     "src/**/*.js",
@@ -59,6 +66,12 @@
     },
     {
       "path": "../../packages/env"
+    },
+    {
+      "path": "../../packages/database"
+    },
+    {
+      "path": "../../packages/auth"
     }
   ]
 }

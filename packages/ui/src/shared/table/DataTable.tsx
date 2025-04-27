@@ -1,9 +1,9 @@
+import { cn } from "@repo/lib";
 import type { Row, Table as TableType } from "@tanstack/react-table";
 import { flexRender } from "@tanstack/react-table";
-import type { ForwardedRef, HTMLAttributes } from "react";
-import { Fragment, forwardRef } from "react";
 import { Loader2 } from "lucide-react";
-import { cn } from "lib/utils";
+import type { ComponentPropsWithRef } from "react";
+import { Fragment } from "react";
 import {
   Table,
   TableBody,
@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "../../primitive/table";
 
-interface Prop<TData> extends HTMLAttributes<HTMLDivElement> {
+interface Prop<TData> extends ComponentPropsWithRef<"div"> {
   table: TableType<TData>;
   isLoading?: boolean;
   stickyHeader?: boolean;
@@ -21,20 +21,17 @@ interface Prop<TData> extends HTMLAttributes<HTMLDivElement> {
   renderSubComponent?: (props: { row: Row<TData> }) => React.ReactElement;
 }
 
-function DataTableInner<TData>(
-  {
-    table,
-    renderSubComponent,
-    stickyHeader = false,
-    isLoading = false,
-    spacing = "md",
-    className,
-    ...props
-  }: Prop<TData>,
-  ref: ForwardedRef<HTMLDivElement>,
-) {
+export function DataTable<TData>({
+  table,
+  renderSubComponent,
+  stickyHeader = false,
+  isLoading = false,
+  spacing = "md",
+  className,
+  ...props
+}: Prop<TData>) {
   return (
-    <div className={className} ref={ref} {...props}>
+    <div className={className} {...props}>
       <Table className="border-separate border-spacing-0">
         <TableHeader
           className={cn(
@@ -128,5 +125,3 @@ function DataTableInner<TData>(
     </div>
   );
 }
-
-export const DataTable = forwardRef(DataTableInner);

@@ -26,5 +26,16 @@
     "src/**/*.spec.jsx",
     "src/**/*.test.jsx"
   ],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "types/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "references": [
+    {
+      "path": "../env/tsconfig.lib.json"
+    }
+  ]
 }

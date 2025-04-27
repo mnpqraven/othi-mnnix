@@ -5,7 +5,11 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": ["packages/protocol/bindings/**/*"]
+    "ignore": [
+      "packages/protocol/bindings/**/*",
+      "packages/database/src/drizzle/**/*",
+      "packages/**/vite.config.ts"
+    ]
   },
   "formatter": {
     "enabled": true,

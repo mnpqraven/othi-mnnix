@@ -1,5 +1,5 @@
+import type { DottedPaths } from "@repo/lib/generics";
 import type { ReactNode } from "react";
-import type { DottedPaths } from "lib/generics";
 import { FormControl, FormField, FormItem, FormLabel } from "../form";
 import type { InputProps } from "../input";
 import { Input } from "../input";

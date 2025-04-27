@@ -1,9 +1,10 @@
+import { cn } from "@repo/lib";
 import type { Column } from "@tanstack/react-table";
 import type { LucideIcon } from "lucide-react";
 import { Check } from "lucide-react";
 import type { ComponentPropsWithoutRef } from "react";
-import { cn } from "lib/utils";
 import {
+  Button,
   Command,
   CommandEmpty,
   CommandGroup,
@@ -12,9 +13,8 @@ import {
   CommandList,
   CommandSeparator,
   Popover,
-  PopoverTrigger,
   PopoverContent,
-  Button,
+  PopoverTrigger,
 } from "../../primitive";
 
 interface OptionItem {
@@ -67,7 +67,7 @@ export function DataTableMultiSelect<TData>({
                   >
                     <div
                       className={cn(
-                        "border-primary mr-2 flex h-4 w-4 items-center justify-center rounded-sm border",
+                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
                         isSelected
                           ? "bg-primary text-primary-foreground"
                           : "opacity-50 [&_svg]:invisible",
@@ -76,7 +76,7 @@ export function DataTableMultiSelect<TData>({
                       <Check className={cn("h-4 w-4")} />
                     </div>
                     {option.icon ? (
-                      <option.icon className="text-muted-foreground mr-2 h-4 w-4" />
+                      <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
                     ) : null}
                     <span>{option.label}</span>
                     {facets?.get(option.value) ? (
