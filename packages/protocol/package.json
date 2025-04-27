@@ -17,6 +17,9 @@
       "default": "./dist/index.js"
     }
   },
+  "scripts": {
+    "lint": "biome check"
+  },
   "dependencies": {
     "@repo/auth": "workspace:*",
     "@repo/database": "workspace:*",
