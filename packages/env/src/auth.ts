@@ -4,11 +4,9 @@ import { z } from "zod";
 export const authEnv = createEnv({
   server: {
     NEXTAUTH_SECRET: z.string(),
-    OTHI_GITHUB_ID: z.string(),
-    OTHI_GITHUB_SECRET: z.string(),
-    GITHUB_ID: z.string(),
-    GITHUB_SECRET: z.string(),
-    AUTH_GITHUB_IDENT: z.coerce.number(),
+    OAUTH_OTHI_GITHUB_ID: z.string(),
+    OAUTH_OTHI_GITHUB_SECRET: z.string(),
+    OAUTH_GITHUB_SUDO_IDENT: z.coerce.number(),
   },
   client: {},
   experimental__runtimeEnv: process.env,

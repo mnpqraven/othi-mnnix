@@ -10,8 +10,8 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     GithubProvider({
-      clientId: env.OTHI_GITHUB_ID,
-      clientSecret: env.OTHI_GITHUB_SECRET,
+      clientId: env.OAUTH_OTHI_GITHUB_ID,
+      clientSecret: env.OAUTH_OTHI_GITHUB_SECRET,
     }),
   ],
   callbacks: {
