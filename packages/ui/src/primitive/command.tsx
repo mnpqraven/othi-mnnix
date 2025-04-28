@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 "use client";
 
 import type { DialogProps } from "@radix-ui/react-dialog";
@@ -6,7 +5,12 @@ import { cn } from "@repo/lib";
 import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
 import type * as React from "react";
-import { Dialog, DialogContent, DialogTitle } from "./dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "./dialog";
 
 const Command = ({
   className,
@@ -21,32 +25,24 @@ const Command = ({
   />
 );
 
-type CommandDialogProps = DialogProps & {
-  loop?: boolean;
-};
-
-function CommandDialog({
+const CommandDialog = ({
   children,
-  loop = false,
+  loop,
   ...props
-}: CommandDialogProps) {
-  return (
-    <Dialog {...props}>
-      <DialogContent
-        className="overflow-hidden p-0 shadow-lg"
-        aria-describedby={undefined}
+}: DialogProps & { loop?: boolean }) => (
+  <Dialog {...props}>
+    <DialogContent className="overflow-hidden p-0">
+      <DialogTitle className="sr-only hidden">Title</DialogTitle>
+      <DialogDescription className="hidden" aria-describedby={undefined} />
+      <Command
+        className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
+        loop={loop}
       >
-        <DialogTitle className="sr-only">Title</DialogTitle>
-        <Command
-          className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
-          loop={loop}
-        >
-          {children}
-        </Command>
-      </DialogContent>
-    </Dialog>
-  );
-}
+        {children}
+      </Command>
+    </DialogContent>
+  </Dialog>
+);
 
 const CommandInput = ({
   className,
@@ -65,7 +61,7 @@ const CommandInput = ({
     {slotBefore}
     <CommandPrimitive.Input
       className={cn(
-        "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+        "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
       {...props}
@@ -116,17 +112,17 @@ const CommandItem = ({
 }: React.ComponentPropsWithRef<typeof CommandPrimitive.Item>) => (
   <CommandPrimitive.Item
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
       className,
     )}
     {...props}
   />
 );
 
-function CommandShortcut({
+const CommandShortcut = ({
   className,
   ...props
-}: React.HTMLAttributes<HTMLSpanElement>) {
+}: React.HTMLAttributes<HTMLSpanElement>) => {
   return (
     <span
       className={cn(
@@ -136,7 +132,7 @@ function CommandShortcut({
       {...props}
     />
   );
-}
+};
 
 export {
   Command,
