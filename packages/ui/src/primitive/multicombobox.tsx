@@ -7,7 +7,6 @@ import Fuse, { type FuseOptionKey } from "fuse.js";
 import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
 import {
   type HTMLAttributes,
-  forwardRef,
   useEffect,
   useMemo,
   useRef,
@@ -350,26 +349,30 @@ interface LoadingDisplayProp extends HTMLAttributes<HTMLDivElement> {
   dataLength: number;
   emptyLabel?: string;
 }
-const LoadingDisplay = forwardRef<HTMLDivElement, LoadingDisplayProp>(
-  ({ dataLength, isLoading, emptyLabel, className, ...props }, ref) => {
-    const st = cva(
-      "flex gap-2 justify-center text-muted-foreground items-center p-2",
+const LoadingDisplay = ({
+  dataLength,
+  isLoading,
+  emptyLabel,
+  className,
+  ...props
+}: LoadingDisplayProp) => {
+  const st = cva(
+    "flex gap-2 justify-center text-muted-foreground items-center p-2",
+  );
+
+  if (isLoading)
+    return (
+      <div {...props} className={st({ className })}>
+        <Loader2 className="h-4 w-4 animate-spin" />
+        Loading...
+      </div>
+    );
+  if (!isLoading && dataLength <= 0)
+    return (
+      <div {...props} className={st({ className })}>
+        {emptyLabel}
+      </div>
     );
 
-    if (isLoading)
-      return (
-        <div {...props} ref={ref} className={st({ className })}>
-          <Loader2 className="h-4 w-4 animate-spin" />
-          Loading...
-        </div>
-      );
-    if (!isLoading && dataLength <= 0)
-      return (
-        <div {...props} ref={ref} className={st({ className })}>
-          {emptyLabel}
-        </div>
-      );
-
-    return null;
-  },
-);
+  return null;
+};
