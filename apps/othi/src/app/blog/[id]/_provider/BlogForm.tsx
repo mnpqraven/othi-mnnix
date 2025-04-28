@@ -15,24 +15,19 @@ import { MultiCombobox } from "@repo/ui/primitive/multicombobox";
 import { Switch } from "@repo/ui/primitive/switch";
 import { useQuery } from "@tanstack/react-query";
 import type { HTMLAttributes } from "react";
-import { forwardRef } from "react";
 import { useBlogForm } from "./BlogFormProvider";
 
-export const BlogForm = forwardRef<
-  HTMLFormElement,
-  HTMLAttributes<HTMLFormElement>
->(function BlogForm({ className, ...props }, ref) {
+export function BlogForm({
+  className,
+  ...props
+}: HTMLAttributes<HTMLFormElement>) {
   const trpc = useTRPC();
   const { data = [], isLoading } = useQuery(trpc.blog.tag.list.queryOptions());
   const { form } = useBlogForm();
 
   return (
     <Form {...form}>
-      <form
-        className={cn("flex flex-col gap-4", className)}
-        ref={ref}
-        {...props}
-      >
+      <form className={cn("flex flex-col gap-4", className)} {...props}>
         <FormField
           control={form.control}
           name="title"
@@ -93,4 +88,4 @@ export const BlogForm = forwardRef<
       </form>
     </Form>
   );
-});
+}

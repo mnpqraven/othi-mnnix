@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -31,10 +32,13 @@
   "linter": {
     "rules": {
       "nursery": {
-        "useSortedClasses": { "fix": "safe" }
+        "useSortedClasses": { "level": "warn", "fix": "safe" }
       },
       "correctness": {
         "noUnusedVariables": "error"
+      },
+      "style": {
+        "useImportType": { "level": "warn", "fix": "safe" }
       }
     }
   }
