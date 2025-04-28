@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { HTMLAttributes } from "react";
-import { forwardRef } from "react";
 import { useViewportInfo } from "./AppListener/hook";
 import { LoggedAvatar } from "./LoggedAvatar";
 
@@ -13,10 +12,10 @@ const HEADER_HEIGHT = 64; // in px
 
 const adminRoutes = ["/sudo", "/whoami"];
 
-export const Navbar = forwardRef<
-  HTMLDivElement,
-  HTMLAttributes<HTMLDivElement>
->(function Navbar({ className, ...props }, ref) {
+export function Navbar({
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) {
   const { isScrolled } = useViewportInfo();
   const path = usePathname();
   const truncatedPath = `/${path.split("/").at(1) ?? ""}`;
@@ -29,7 +28,6 @@ export const Navbar = forwardRef<
         isScrolled ? "bg-background/50 backdrop-blur-md" : "bg-background",
         className,
       )}
-      ref={ref}
       style={{ height: `${HEADER_HEIGHT}px` }}
       {...props}
     >
@@ -45,4 +43,4 @@ export const Navbar = forwardRef<
       {status === "authenticated" ? <LoggedAvatar /> : null}
     </div>
   );
-});
+}

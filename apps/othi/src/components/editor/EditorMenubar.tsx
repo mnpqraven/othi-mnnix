@@ -1,7 +1,6 @@
 import { cn } from "@repo/lib";
 import { useCurrentEditor } from "@tiptap/react";
 import type { HTMLAttributes } from "react";
-import { forwardRef } from "react";
 import {
   EditorBlockquote,
   EditorBold,
@@ -17,10 +16,10 @@ import {
   EditorUndo,
 } from "./modifiers";
 
-export const EditorMenubar = forwardRef<
-  HTMLDivElement,
-  HTMLAttributes<HTMLDivElement>
->(function EditorMenubar({ className, ...props }, ref) {
+export function EditorMenubar({
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) {
   const { editor } = useCurrentEditor();
   if (!editor) return null;
 
@@ -31,7 +30,6 @@ export const EditorMenubar = forwardRef<
         className,
       )}
       {...props}
-      ref={ref}
     >
       <EditorUndo />
       <EditorRedo />
@@ -47,4 +45,4 @@ export const EditorMenubar = forwardRef<
       <EditorBlockquote />
     </div>
   );
-});
+}
