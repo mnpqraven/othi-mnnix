@@ -54,7 +54,5 @@ const Button = ({
     />
   );
 };
-// @ts-ignore type override
-Button.displayName = "Button";
 
 export { Button, buttonVariants };
