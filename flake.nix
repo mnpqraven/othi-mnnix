@@ -12,7 +12,9 @@
     inputs.flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = (import nixpkgs) {
+          inherit system;
+        };
         # @see https://github.com/direnv/direnv/issues/73#issuecomment-2478178424
         # Function to create script
         mkScript =

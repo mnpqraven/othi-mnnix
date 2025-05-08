@@ -1,4 +1,4 @@
-name: CI
+name: webapp
 
 on:
   push:
@@ -42,7 +42,8 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - run: |
+      - name: install dependencies
+        run: |
           pnpm config set "@tiptap-pro:registry" https://registry.tiptap.dev/
           pnpm config set "//registry.tiptap.dev/:_authToken" ${{secrets.TIPTAP_PRO_TOKEN}}
           pnpm install --frozen-lockfile
