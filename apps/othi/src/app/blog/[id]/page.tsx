@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import { MoveLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DeleteButton } from "./DeleteButton";
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   // this always runs until completion so loading files might not show up if
@@ -55,6 +56,9 @@ export default async function Page({ params }: Params) {
           Back
         </Link>
 
+        <SudoGuard>
+          <DeleteButton />
+        </SudoGuard>
         <SudoGuard>
           <Link href={`/blog/${id}/edit`}>
             <Button>Edit</Button>

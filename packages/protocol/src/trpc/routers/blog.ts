@@ -446,4 +446,9 @@ export const blogRouter = router({
         return query;
       }),
   },
+  delete: superAdminProcedure
+    .input(selectBlogSchema.pick({ id: true }))
+    .mutation(async ({ input }) => {
+      await db.delete(blogs).where(eq(blogs.id, input.id));
+    }),
 });

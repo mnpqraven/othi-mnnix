@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-throw-literal */
-/* eslint-disable no-console */
 import { type FileRouter, createUploadthing } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
@@ -21,11 +19,7 @@ export const ourFileRouter = {
       const user = await auth(req);
 
       // If you throw, the user will not be able to upload
-      if (!user)
-        throw new UploadThingError({
-          message: "Unauthorized",
-          code: "FORBIDDEN",
-        });
+      if (!user) throw new UploadThingError("Unauthorized");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
@@ -34,7 +28,7 @@ export const ourFileRouter = {
       // This code RUNS ON YOUR SERVER after upload
       console.log("Upload complete for userId:", metadata.userId);
 
-      console.log("file url", file.url);
+      console.log("file url", file.ufsUrl);
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       return { uploadedBy: metadata.userId };
@@ -58,7 +52,7 @@ export const ourFileRouter = {
       // This code RUNS ON YOUR SERVER after upload
       console.log("Upload complete for userId:", metadata.userId);
 
-      console.log("file url", file.url);
+      console.log("file url", file.ufsUrl);
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       return { uploadedBy: metadata.userId };
