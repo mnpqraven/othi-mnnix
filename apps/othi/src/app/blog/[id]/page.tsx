@@ -56,14 +56,16 @@ export default async function Page({ params }: Params) {
           Back
         </Link>
 
-        <SudoGuard>
-          <DeleteButton />
-        </SudoGuard>
-        <SudoGuard>
-          <Link href={`/blog/${id}/edit`}>
-            <Button>Edit</Button>
-          </Link>
-        </SudoGuard>
+        <div className="flex items-center gap-2">
+          <SudoGuard>
+            <DeleteButton blogId={meta.id} />
+          </SudoGuard>
+          <SudoGuard>
+            <Link href={`/blog/${id}/edit`}>
+              <Button>Edit</Button>
+            </Link>
+          </SudoGuard>
+        </div>
       </div>
 
       <div className="flex flex-col gap-2">
