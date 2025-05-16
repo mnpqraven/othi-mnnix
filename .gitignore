@@ -9,6 +9,8 @@ dist
 tmp
 out-tsc
 target
+.output
+.vinxi
 
 # dependencies
 node_modules
