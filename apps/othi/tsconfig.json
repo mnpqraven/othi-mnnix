@@ -50,19 +50,16 @@
   ],
   "references": [
     {
-      "path": "../../packages/ui"
-    },
-    {
-      "path": "../../packages/protocol"
+      "path": "../../packages/database"
     },
     {
       "path": "../../packages/lib"
     },
     {
-      "path": "../../packages/env"
+      "path": "../../packages/ui"
     },
     {
-      "path": "../../packages/database"
+      "path": "../../packages/protocol"
     },
     {
       "path": "../../packages/auth"

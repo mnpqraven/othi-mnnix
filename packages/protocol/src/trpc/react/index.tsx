@@ -15,10 +15,10 @@ import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
 import type { AppRouter } from "..";
 import {
+  TANSTACK_OPTIONS,
   TRPCProvider,
   createQueryClient,
   useTRPC,
-  TANSTACK_OPTIONS,
 } from "./client";
 import { transformer } from "./transformer";
 

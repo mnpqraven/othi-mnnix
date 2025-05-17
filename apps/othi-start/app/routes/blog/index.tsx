@@ -1,3 +1,7 @@
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { Greeter } from "@repo/protocol/proto_ts/helloworld_pb";
+import { rpcClient } from "@repo/protocol/rpc";
+import { Button } from "@repo/ui/primitive/button";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { createFileRoute, getRouteApi } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
@@ -11,6 +15,15 @@ export const Route = createFileRoute("/blog/")({
 function RouteComponent() {
   return (
     <div>
+      <ThemeToggle />
+      <Button
+        onClick={() => {
+          console.log("hello");
+        }}
+      >
+        yo
+      </Button>
+
       <ApiRouteDemo />
       <ApiQueryDemo />
       <RpcDemo />
@@ -30,9 +43,6 @@ function ApiRouteDemo() {
   const data = routeApi.useLoaderData();
   return <div className="">Api Demo: {data}</div>;
 }
-
-import { Greeter } from "@repo/protocol/proto_ts/helloworld_pb";
-import { rpcClient } from "@repo/protocol/rpc";
 
 function RpcDemo() {
   const client = rpcClient(Greeter);

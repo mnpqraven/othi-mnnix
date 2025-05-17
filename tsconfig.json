@@ -23,6 +23,9 @@
     },
     {
       "path": "./packages/database"
+    },
+    {
+      "path": "./apps/othi-start"
     }
   ]
 }

@@ -1,10 +1,6 @@
-import { TANSTACK_OPTIONS } from "@repo/protocol/trpc/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { AppProvider, queryClient } from "./providers";
 import { routeTree } from "./routeTree.gen";
-
-const queryClient = new QueryClient(TANSTACK_OPTIONS());
 
 export function createRouter() {
   const router = createTanStackRouter({
@@ -14,17 +10,10 @@ export function createRouter() {
     context: {
       queryClient,
     },
-    Wrap,
+    Wrap: AppProvider,
   });
 
   return router;
-}
-
-// TODO: component
-function Wrap({ children }: { children: Readonly<ReactNode> }) {
-  return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
 }
 
 declare module "@tanstack/react-router" {

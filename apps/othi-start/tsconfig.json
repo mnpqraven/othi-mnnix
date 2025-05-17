@@ -1,30 +1,22 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "moduleResolution": "Bundler",
     "module": "ESNext",
     "target": "ES2022",
     "skipLibCheck": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "paths": {
+      "@/*": ["./app/*"]
+    }
   },
   "references": [
-    {
-      "path": "../../packages/ui"
-    },
     {
       "path": "../../packages/protocol"
     },
     {
-      "path": "../../packages/lib"
-    },
-    {
-      "path": "../../packages/env"
-    },
-    {
-      "path": "../../packages/database"
-    },
-    {
-      "path": "../../packages/auth"
+      "path": "../../packages/ui"
     }
   ]
 }
