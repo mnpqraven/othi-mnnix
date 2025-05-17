@@ -8,6 +8,7 @@
   "files": {
     "ignore": [
       "apps/**/routeTree.gen.ts",
+      "apps/**/app.config.timestamp_*.*",
       "packages/protocol/src/proto_ts/**/*",
       "packages/database/src/drizzle/**/*",
       "packages/**/vite.config.ts"

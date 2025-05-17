@@ -1,6 +1,6 @@
 import { cn } from "@repo/lib";
+import type { DottedPaths } from "@repo/lib/generics";
 import { cva } from "class-variance-authority";
-import type { DottedPaths } from "lib/generics";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { FormControl, FormField, FormItem, FormLabel } from "../form";
 import {
