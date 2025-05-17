@@ -22,7 +22,6 @@
       "@/*": ["./src/*"]
     },
     "outDir": "dist",
-    "rootDir": "src",
     "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
   },
   "include": [
@@ -50,16 +49,19 @@
   ],
   "references": [
     {
-      "path": "../../packages/database"
+      "path": "../../packages/ui"
+    },
+    {
+      "path": "../../packages/protocol"
     },
     {
       "path": "../../packages/lib"
     },
     {
-      "path": "../../packages/ui"
+      "path": "../../packages/env"
     },
     {
-      "path": "../../packages/protocol"
+      "path": "../../packages/database"
     },
     {
       "path": "../../packages/auth"

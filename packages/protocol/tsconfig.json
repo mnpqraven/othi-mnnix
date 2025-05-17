@@ -3,19 +3,19 @@
   "include": [],
   "references": [
     {
-      "path": "../auth"
+      "path": "../lib"
     },
     {
-      "path": "../lib"
+      "path": "../env"
     },
     {
       "path": "../database"
     },
     {
-      "path": "./tsconfig.lib.json"
+      "path": "../auth"
     },
     {
-      "path": "./tsconfig.spec.json"
+      "path": "./tsconfig.lib.json"
     }
   ],
   "extends": "../../tsconfig.base.json"

@@ -118,7 +118,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/lib
       '@repo/protocol':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/protocol
       '@repo/ui':
         specifier: workspace:*

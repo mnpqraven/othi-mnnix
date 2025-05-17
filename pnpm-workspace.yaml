@@ -4,8 +4,10 @@ packages:
 
 onlyBuiltDependencies:
   - '@biomejs/biome'
+  - '@bufbuild/buf'
   - '@parcel/watcher'
   - '@swc/core'
+  - better-sqlite3
   - esbuild
   - nx
   - sharp

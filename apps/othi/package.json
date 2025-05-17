@@ -15,7 +15,7 @@
     "@repo/database": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/lib": "workspace:*",
-    "@repo/protocol": "workspace:^",
+    "@repo/protocol": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tanstack/react-query": "^5.76.1",
     "@tanstack/react-table": "^8.21.3",
