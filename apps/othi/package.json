@@ -17,7 +17,7 @@
     "@repo/lib": "workspace:*",
     "@repo/protocol": "workspace:^",
     "@repo/ui": "workspace:*",
-    "@tanstack/react-query": "^5.74.4",
+    "@tanstack/react-query": "^5.76.1",
     "@tanstack/react-table": "^8.21.3",
     "@tiptap-pro/extension-file-handler": "2.18.0-beta.13",
     "@tiptap/extension-image": "^2.11.7",

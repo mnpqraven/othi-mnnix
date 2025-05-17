@@ -27,7 +27,9 @@ export type RouterInputs = inferRouterInputs<AppRouter>;
  */
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
 
-const TANSTACK_OPTIONS = (conf?: QueryClientConfig): QueryClientConfig => ({
+export const TANSTACK_OPTIONS = (
+  conf?: QueryClientConfig,
+): QueryClientConfig => ({
   defaultOptions: {
     queries: {
       // With SSR, we usually want to set some default staleTime

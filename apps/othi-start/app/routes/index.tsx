@@ -24,11 +24,11 @@ const updateCount = createServerFn({ method: "POST" })
   });
 
 export const Route = createFileRoute("/")({
-  component: Home,
+  component: Page,
   loader: async () => await getCount(),
 });
 
-function Home() {
+function Page() {
   const router = useRouter();
   const state = Route.useLoaderData();
 

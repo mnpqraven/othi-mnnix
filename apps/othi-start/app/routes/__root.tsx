@@ -1,11 +1,12 @@
-// app/routes/__root.tsx
-import type { ReactNode } from "react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
-  Outlet,
-  createRootRoute,
   HeadContent,
+  Outlet,
   Scripts,
+  createRootRoute,
 } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import type { ReactNode } from "react";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -37,6 +38,8 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body>
         {children}
+        <TanStackRouterDevtools position="bottom-right" />
+        <ReactQueryDevtools buttonPosition="bottom-left" />
         <Scripts />
       </body>
     </html>

@@ -14,10 +14,15 @@ import {
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
 import type { AppRouter } from "..";
-import { TRPCProvider, createQueryClient, useTRPC } from "./client";
+import {
+  TRPCProvider,
+  createQueryClient,
+  useTRPC,
+  TANSTACK_OPTIONS,
+} from "./client";
 import { transformer } from "./transformer";
 
-export { useTRPC };
+export { useTRPC, TANSTACK_OPTIONS };
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
 let queryConf: QueryClientConfig | undefined = undefined;

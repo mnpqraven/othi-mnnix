@@ -7,5 +7,24 @@
     "skipLibCheck": true,
     "strictNullChecks": true
   },
-  "references": []
+  "references": [
+    {
+      "path": "../../packages/ui"
+    },
+    {
+      "path": "../../packages/protocol"
+    },
+    {
+      "path": "../../packages/lib"
+    },
+    {
+      "path": "../../packages/env"
+    },
+    {
+      "path": "../../packages/database"
+    },
+    {
+      "path": "../../packages/auth"
+    }
+  ]
 }
