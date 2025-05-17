@@ -1,14 +1,13 @@
 packages:
-  - packages/*
-  - apps/*
-
+  - "packages/*"
+  - "apps/*"
 onlyBuiltDependencies:
-  - '@biomejs/biome'
-  - '@bufbuild/buf'
-  - '@parcel/watcher'
-  - '@swc/core'
-  - better-sqlite3
-  - esbuild
-  - nx
-  - sharp
-  - unrs-resolver
+  - "@biomejs/biome"
+  - "@bufbuild/buf"
+  - "@parcel/watcher"
+  - "@swc/core"
+  - "better-sqlite3"
+  - "esbuild"
+  - "nx"
+  - "sharp"
+  - "unrs-resolver"

@@ -37,7 +37,8 @@
         "useSortedClasses": { "level": "warn", "fix": "safe" }
       },
       "correctness": {
-        "noUnusedVariables": "error"
+        "noUnusedVariables": "error",
+        "noChildrenProp": "off"
       },
       "style": {
         "useImportType": { "level": "warn", "fix": "safe" }

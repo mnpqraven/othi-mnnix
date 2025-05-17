@@ -26,6 +26,9 @@
     },
     {
       "path": "./apps/othi-start"
+    },
+    {
+      "path": "./packages/env-agnostic"
     }
   ]
 }
