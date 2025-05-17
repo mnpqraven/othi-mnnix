@@ -12,7 +12,10 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as FormIndexImport } from './routes/form/index'
 import { Route as BlogIndexImport } from './routes/blog/index'
+import { Route as FormServerActionImport } from './routes/form/server-action'
+import { Route as FormBasicImport } from './routes/form/basic'
 
 // Create/Update Routes
 
@@ -22,9 +25,27 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const FormIndexRoute = FormIndexImport.update({
+  id: '/form/',
+  path: '/form/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const BlogIndexRoute = BlogIndexImport.update({
   id: '/blog/',
   path: '/blog/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FormServerActionRoute = FormServerActionImport.update({
+  id: '/form/server-action',
+  path: '/form/server-action',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FormBasicRoute = FormBasicImport.update({
+  id: '/form/basic',
+  path: '/form/basic',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,11 +60,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/form/basic': {
+      id: '/form/basic'
+      path: '/form/basic'
+      fullPath: '/form/basic'
+      preLoaderRoute: typeof FormBasicImport
+      parentRoute: typeof rootRoute
+    }
+    '/form/server-action': {
+      id: '/form/server-action'
+      path: '/form/server-action'
+      fullPath: '/form/server-action'
+      preLoaderRoute: typeof FormServerActionImport
+      parentRoute: typeof rootRoute
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/form/': {
+      id: '/form/'
+      path: '/form'
+      fullPath: '/form'
+      preLoaderRoute: typeof FormIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -53,37 +95,58 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/form/basic': typeof FormBasicRoute
+  '/form/server-action': typeof FormServerActionRoute
   '/blog': typeof BlogIndexRoute
+  '/form': typeof FormIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/form/basic': typeof FormBasicRoute
+  '/form/server-action': typeof FormServerActionRoute
   '/blog': typeof BlogIndexRoute
+  '/form': typeof FormIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/form/basic': typeof FormBasicRoute
+  '/form/server-action': typeof FormServerActionRoute
   '/blog/': typeof BlogIndexRoute
+  '/form/': typeof FormIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/blog'
+  fullPaths: '/' | '/form/basic' | '/form/server-action' | '/blog' | '/form'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/blog'
-  id: '__root__' | '/' | '/blog/'
+  to: '/' | '/form/basic' | '/form/server-action' | '/blog' | '/form'
+  id:
+    | '__root__'
+    | '/'
+    | '/form/basic'
+    | '/form/server-action'
+    | '/blog/'
+    | '/form/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FormBasicRoute: typeof FormBasicRoute
+  FormServerActionRoute: typeof FormServerActionRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  FormIndexRoute: typeof FormIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FormBasicRoute: FormBasicRoute,
+  FormServerActionRoute: FormServerActionRoute,
   BlogIndexRoute: BlogIndexRoute,
+  FormIndexRoute: FormIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +160,26 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/blog/"
+        "/form/basic",
+        "/form/server-action",
+        "/blog/",
+        "/form/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
+    "/form/basic": {
+      "filePath": "form/basic.tsx"
+    },
+    "/form/server-action": {
+      "filePath": "form/server-action.tsx"
+    },
     "/blog/": {
       "filePath": "blog/index.tsx"
+    },
+    "/form/": {
+      "filePath": "form/index.tsx"
     }
   }
 }

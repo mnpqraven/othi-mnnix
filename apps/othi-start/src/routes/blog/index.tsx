@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { env } from "@/lib/env";
 import { Greeter } from "@repo/protocol/proto_ts/helloworld_pb";
 import { rpcClient } from "@repo/protocol/rpc";
 import { Button } from "@repo/ui/primitive/button";
@@ -33,7 +34,7 @@ function RouteComponent() {
 
 const serverGreetApi = createServerFn({ method: "POST" }).handler(async () => {
   return ky
-    .post("http://localhost:5000/api/rpcgreet", {
+    .post(`${env.HOST_VPS_API}/api/rpcgreet`, {
       json: { name: "ssrthi from browser" },
     })
     .text();
@@ -60,7 +61,7 @@ const greetApiOptions = () =>
     queryKey: ["api", "greet"],
     queryFn: () =>
       ky
-        .post("http://localhost:5000/api/rpcgreet", {
+        .post(`${env.HOST_VPS_API}/api/rpcgreet`, {
           json: { name: "othi from browser" },
         })
         .text(),

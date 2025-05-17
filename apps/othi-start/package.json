@@ -7,18 +7,21 @@
     "name": "othi-start"
   },
   "scripts": {
-    "dev": "vinxi dev --port 4000",
+    "dev": "pnpx dotenv-cli -e ../../.env -c -- vinxi dev --port 4000",
     "build": "vinxi build",
     "start": "vinxi start",
     "lint": "biome check"
   },
   "dependencies": {
+    "@repo/env-agnostic": "workspace:*",
     "@repo/protocol": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tailwindcss/postcss": "^4.1.4",
+    "@tanstack/react-form": "^1.11.1",
     "@tanstack/react-query": "^5.76.1",
     "@tanstack/react-router": "^1.120.3",
     "@tanstack/react-start": "^1.120.3",
+    "arktype": "^2.1.20",
     "jotai": "^2.12.3",
     "ky": "^1.8.1",
     "lucide-react": "^0.503.0",
