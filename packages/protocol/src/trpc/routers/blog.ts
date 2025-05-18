@@ -124,8 +124,8 @@ async function updateMarkdownFile(input: {
     console.log("error encountered", res?.error);
     return undefined;
   }
-  const { key, name, url } = res.data;
-  return { fileName: name, fileKey: key, mdUrl: url };
+  const { key, name, ufsUrl } = res.data;
+  return { fileName: name, fileKey: key, mdUrl: ufsUrl };
 }
 
 const createMetaSchema = insertBlogSchema.pick({
@@ -411,12 +411,12 @@ export const blogRouter = router({
         // NOTE: upload meta to db
 
         const _metaRes = await Promise.all(
-          validResponses.map(async ({ name, url }) => {
+          validResponses.map(async ({ name, ufsUrl }) => {
             const req = await db
               .insert(medias)
               .values({
                 fileName: name,
-                mediaUrl: url,
+                mediaUrl: ufsUrl,
                 tempBlogId: input.tempBlogId,
               })
               .returning();
