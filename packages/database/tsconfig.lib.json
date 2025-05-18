@@ -13,7 +13,7 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../env/tsconfig.lib.json"
+      "path": "../env-agnostic/tsconfig.lib.json"
     }
   ]
 }

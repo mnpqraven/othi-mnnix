@@ -1,4 +1,5 @@
 import { createEnv } from "@t3-oss/env-core";
+import { databaseEnv } from "./database";
 import { hostsEnv } from "./hosts";
 
 export const env = (clientPrefix: "VITE_" | "NEXT_PUBLIC_") =>
@@ -12,3 +13,5 @@ export const env = (clientPrefix: "VITE_" | "NEXT_PUBLIC_") =>
     emptyStringAsUndefined: true,
     extends: [hostsEnv(clientPrefix)],
   });
+
+export { hostsEnv, databaseEnv };

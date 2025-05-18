@@ -1,4 +1,4 @@
-import { env } from "@repo/env";
+import { databaseEnv as env } from "@repo/env-agnostic";
 import type { Config } from "drizzle-kit";
 
 export default {

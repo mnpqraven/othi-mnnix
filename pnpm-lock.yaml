@@ -341,9 +341,9 @@ importers:
       '@libsql/client':
         specifier: ^0.15.4
         version: 0.15.4
-      '@repo/env':
+      '@repo/env-agnostic':
         specifier: workspace:*
-        version: link:../env
+        version: link:../env-agnostic
       better-sqlite3:
         specifier: ^11.9.1
         version: 11.9.1

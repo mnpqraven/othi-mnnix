@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@libsql/client": "^0.15.4",
-    "@repo/env": "workspace:*",
+    "@repo/env-agnostic": "workspace:*",
     "better-sqlite3": "^11.9.1",
     "dotenv": "^16.5.0",
     "drizzle-arktype": "^0.1.2",
