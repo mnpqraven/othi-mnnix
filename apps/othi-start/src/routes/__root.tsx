@@ -1,6 +1,7 @@
+import { Navbar } from "@/components/Navbar";
 import { getThemeServerFn } from "@/lib/theme";
-import { ThemeProvider, useTheme } from "@/providers/theme";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ProviderDOM } from "@/providers";
+import { useTheme } from "@/providers/theme";
 import {
   DefaultGlobalNotFound,
   HeadContent,
@@ -8,9 +9,13 @@ import {
   Scripts,
   createRootRoute,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type { ReactNode } from "react";
 import appCss from "../styles/app.css?url";
+
+export async function rootLoader() {
+  const theme = await getThemeServerFn();
+  return { theme };
+}
 
 export const Route = createRootRoute({
   head: () => ({
@@ -23,17 +28,17 @@ export const Route = createRootRoute({
   }),
   component: RootComponent,
   notFoundComponent: DefaultGlobalNotFound,
-  loader: () => getThemeServerFn(),
+  loader: rootLoader,
 });
 
 function RootComponent() {
-  const theme = Route.useLoaderData();
+  const loaded = Route.useLoaderData();
   return (
-    <ThemeProvider initialTheme={theme}>
+    <ProviderDOM loaded={loaded}>
       <RootDocument>
         <Outlet />
       </RootDocument>
-    </ThemeProvider>
+    </ProviderDOM>
   );
 }
 
@@ -45,9 +50,8 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <HeadContent />
       </head>
       <body>
-        {children}
-        <TanStackRouterDevtools position="bottom-right" />
-        <ReactQueryDevtools buttonPosition="bottom-left" />
+        <Navbar />
+        <main className="flex flex-col">{children}</main>
         <Scripts />
       </body>
     </html>

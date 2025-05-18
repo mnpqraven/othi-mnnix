@@ -1,3 +1,4 @@
+import { ulid } from "ulid";
 import { sql } from "drizzle-orm";
 import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
@@ -29,7 +30,8 @@ export type Blog = typeof blogs.$inferSelect;
 export type BlogInsert = typeof blogs.$inferInsert;
 
 export const blogTags = sqliteTable("blog_tag", {
-  code: text("code").primaryKey().notNull(),
+  id: text("id").primaryKey().$defaultFn(ulid),
+  code: text("code").unique().notNull(),
   label: text("label", { length: 256 }).notNull(),
 });
 

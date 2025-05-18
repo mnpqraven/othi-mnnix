@@ -1,5 +1,5 @@
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
-import { AppProvider, queryClient } from "./providers";
+import { ProviderNoDOM, queryClient } from "./providers";
 import { routeTree } from "./routeTree.gen";
 
 export function createRouter() {
@@ -10,7 +10,7 @@ export function createRouter() {
     context: {
       queryClient,
     },
-    Wrap: AppProvider,
+    Wrap: ProviderNoDOM,
   });
 
   return router;
