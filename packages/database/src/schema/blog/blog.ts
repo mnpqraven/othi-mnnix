@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { crudSchema } from "src/utils";
 import { ulid } from "ulid";
 
 export const blogs = sqliteTable("blogs", {
@@ -18,13 +18,7 @@ export const blogs = sqliteTable("blogs", {
     .default(sql`(unixepoch())`),
 });
 
-export const insertBlogSchema = createInsertSchema(blogs, {
-  title: (schema) =>
-    schema.min(1, {
-      message: "Blog title must be at least 1 character long",
-    }),
-});
-export const selectBlogSchema = createSelectSchema(blogs);
+export const BlogSchemas = crudSchema(blogs);
 
 export type Blog = typeof blogs.$inferSelect;
 export type BlogInsert = typeof blogs.$inferInsert;
@@ -35,9 +29,6 @@ export const blogTags = sqliteTable("blog_tag", {
   label: text("label", { length: 256 }).notNull(),
 });
 
-export const insertBlogTagSchema = createInsertSchema(blogTags, {
-  code: (schema) => schema.min(1, { message: "Required" }),
-  label: (schema) => schema.min(1, { message: "Required" }),
-});
+export const BlogTagSchemas = crudSchema(blogTags);
 
 export type BlogTag = typeof blogTags.$inferSelect;

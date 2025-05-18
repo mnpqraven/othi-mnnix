@@ -1,17 +1,8 @@
 import { LibsqlError } from "@libsql/client";
 import { db } from "@repo/database";
-import { blogTags } from "@repo/database/schema";
+import { BlogTagSchemas, blogTags } from "@repo/database/schema";
 import { createServerFn } from "@tanstack/react-start";
-import { type } from "arktype";
 import { eq } from "drizzle-orm";
-
-// TODO: integrate with
-export const BlogTagSchema = type({
-  id: "string",
-  code: "0<string<256",
-  label: "0<string<256",
-});
-export type BlogTagSchema = typeof BlogTagSchema.infer;
 
 export const blogTagList = createServerFn({ method: "GET" }).handler(
   async () => {
@@ -21,7 +12,7 @@ export const blogTagList = createServerFn({ method: "GET" }).handler(
 );
 
 export const blogTagCreate = createServerFn({ method: "POST" })
-  .validator(BlogTagSchema.omit("id"))
+  .validator(BlogTagSchemas.create)
   .handler(async ({ data }) => {
     try {
       await db.insert(blogTags).values(data);
@@ -41,15 +32,20 @@ export const blogTagCreate = createServerFn({ method: "POST" })
   });
 
 export const blogTagDelete = createServerFn({ method: "POST" })
-  .validator(BlogTagSchema.pick("id"))
+  .validator(BlogTagSchemas.select.pick("id"))
   .handler(async ({ data }) => {
     await db.delete(blogTags).where(eq(blogTags.id, data.id));
   });
 
 export const blogTagUpdate = createServerFn({ method: "POST" })
-  .validator(BlogTagSchema)
+  // FIXME: id being optional is still valid here
+  // should have required id
+  .validator(BlogTagSchemas.update)
   .handler(async ({ data }) => {
-    await db.update(blogTags).set(data).where(eq(blogTags.id, data.id));
+    await db
+      .update(blogTags)
+      .set(data)
+      .where(eq(blogTags.id, data.id ?? ""));
   });
 
 export const blogTagCRUD = {

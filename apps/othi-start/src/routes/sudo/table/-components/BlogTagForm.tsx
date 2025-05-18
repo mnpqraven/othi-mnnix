@@ -1,8 +1,9 @@
 import { useForm } from "@/components/form";
+import { BlogTagSchemas } from "@repo/database/schema";
 import { Button } from "@repo/ui/primitive/button";
 import { toast } from "@repo/ui/primitive/sonner";
 import { useRouter } from "@tanstack/react-router";
-import { BlogTagSchema, blogTagCRUD } from "../blog_tag/-blog_tag_server";
+import { type BlogTagSchema, blogTagCRUD } from "../blog_tag/-blog_tag_server";
 
 interface Props {
   defaultValues?: BlogTagSchema;
@@ -15,7 +16,7 @@ export function BlogTagForm({ defaultValues, mode = "create" }: Props) {
     defaultValues,
     validators: {
       // we are validating twice, maybe server side form only ?
-      onChange: BlogTagSchema.omit("id"),
+      onChange: BlogTagSchemas[mode],
     },
     onSubmit: async ({ value, formApi }) => {
       console.log("form value", value);
