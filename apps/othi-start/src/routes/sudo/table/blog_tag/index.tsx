@@ -1,11 +1,10 @@
 import { useTable } from "@repo/lib/hooks";
 import { DataTable } from "@repo/ui/shared/table/DataTable";
-import { createFileRoute } from "@tanstack/react-router";
+import { BlogTagForm } from "../-components/BlogTagForm";
 import { blogTagList } from "./-blog_tag_server";
 import { blogTagsColumns } from "./-columns";
-import { BlogTagForm } from "../-components/BlogTagForm";
 
-export const Route = createFileRoute("/sudo/table/blog_tag/")({
+export const Route = createFileRoute({
   component: RouteComponent,
   loader: async () => await blogTagList(),
   ssr: false,

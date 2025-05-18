@@ -1,27 +1,8 @@
+import { useForm } from "@/components/form";
 import { Button } from "@repo/ui/primitive/button";
-import { Input } from "@repo/ui/primitive/input";
-import { Label } from "@repo/ui/primitive/label";
 import { toast } from "@repo/ui/primitive/sonner";
-import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
-import {
-  blogTagCreate,
-  BlogTagSchema,
-  blogTagUpdate,
-} from "../blog_tag/-blog_tag_server";
 import { useRouter } from "@tanstack/react-router";
-
-// FORM init block
-// TODO: global hook
-const { fieldContext, formContext } = createFormHookContexts();
-const { useAppForm } = createFormHook({
-  fieldComponents: {
-    Label,
-    Input,
-  },
-  formComponents: {},
-  fieldContext,
-  formContext,
-});
+import { BlogTagSchema, blogTagCRUD } from "../blog_tag/-blog_tag_server";
 
 interface Props {
   defaultValues?: BlogTagSchema;
@@ -30,31 +11,23 @@ interface Props {
 
 export function BlogTagForm({ defaultValues, mode = "create" }: Props) {
   const router = useRouter();
-  const form = useAppForm({
+  const form = useForm({
     defaultValues,
     validators: {
       // we are validating twice, maybe server side form only ?
       onChange: BlogTagSchema.omit("id"),
     },
     onSubmit: async ({ value, formApi }) => {
-      try {
-        console.log("form value", value);
-        switch (mode) {
-          case "create":
-            await blogTagCreate({ data: value });
-            break;
-          case "update":
-            await blogTagUpdate({ data: value });
-            break;
-          default:
-            break;
-        }
-        toast.success(`blog tag ${mode}d`);
-        router.invalidate();
-        formApi.reset();
-      } catch (e) {
-        toast.error("client error");
-      }
+      console.log("form value", value);
+
+      await blogTagCRUD[mode]({ data: value });
+
+      toast.success(`blog tag ${mode}d`);
+      router.invalidate();
+      formApi.reset();
+    },
+    onSubmitInvalid: () => {
+      console.log("trigger onSubmitInvalid");
     },
   });
 
@@ -68,39 +41,11 @@ export function BlogTagForm({ defaultValues, mode = "create" }: Props) {
       <div className="flex gap-2">
         <form.AppField
           name="code"
-          children={(field) => (
-            <div className="space-y-2">
-              <field.Label className="capitalize" htmlFor={field.name}>
-                {field.name}
-              </field.Label>
-              <field.Input
-                id={field.name}
-                value={field.state.value}
-                onChange={(e) => field.handleChange(e.target.value)}
-              />
-              {!field.state.meta.isValid ? (
-                <em>{field.state.meta.errors.join(", ")}</em>
-              ) : null}
-            </div>
-          )}
+          children={(field) => <field.Input labelText="Code" />}
         />
         <form.AppField
           name="label"
-          children={(field) => (
-            <div className="space-y-2">
-              <field.Label className="capitalize" htmlFor={field.name}>
-                {field.name}
-              </field.Label>
-              <field.Input
-                id={field.name}
-                value={field.state.value}
-                onChange={(e) => field.handleChange(e.target.value)}
-              />
-              {!field.state.meta.isValid ? (
-                <em>{field.state.meta.errors.join(", ")}</em>
-              ) : null}
-            </div>
-          )}
+          children={(field) => <field.Input labelText="Label" />}
         />
 
         <Button

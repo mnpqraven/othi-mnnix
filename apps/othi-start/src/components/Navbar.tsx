@@ -1,10 +1,8 @@
 import { useViewportInfo } from "@/lib/hooks/useViewportInfo";
 import { cn } from "@repo/lib";
 import { Link } from "@tanstack/react-router";
-import { link } from "fs";
-import { INTERNAL_getBuildingBlocksRev1 } from "jotai/vanilla/internals";
-
-import { ComponentPropsWithRef } from "react";
+import type { ComponentPropsWithRef } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const routes = ["/", "/sudo", "/whoami", "/blog"] as const;
 
@@ -14,7 +12,7 @@ export function Navbar({ className, ...props }: ComponentPropsWithRef<"div">) {
   return (
     <div
       className={cn(
-        "sticky top-0 z-50 flex items-center justify-between gap-2 border-b px-4 duration-1000",
+        "sticky top-0 z-50 flex items-center justify-between gap-2 border-b px-4 py-1 duration-200",
         isScrolled ? "bg-background/50 backdrop-blur-md" : "bg-background",
         className,
       )}
@@ -27,6 +25,7 @@ export function Navbar({ className, ...props }: ComponentPropsWithRef<"div">) {
           </Link>
         ))}
       </div>
+      <ThemeToggle />
     </div>
   );
 }

@@ -1,10 +1,9 @@
 import { Input } from "@repo/ui/primitive/input";
 import { Label } from "@repo/ui/primitive/label";
 import { formOptions, useForm } from "@tanstack/react-form";
-import { createFileRoute } from "@tanstack/react-router";
 import { type } from "arktype";
 
-export const Route = createFileRoute("/form/basic")({
+export const Route = createFileRoute({
   component: RouteComponent,
 });
 

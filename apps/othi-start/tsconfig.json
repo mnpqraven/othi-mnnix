@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "composite": false,
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"]
@@ -14,7 +15,13 @@
       "path": "../../packages/protocol"
     },
     {
+      "path": "../../packages/lib"
+    },
+    {
       "path": "../../packages/env-agnostic"
+    },
+    {
+      "path": "../../packages/database"
     }
   ]
 }

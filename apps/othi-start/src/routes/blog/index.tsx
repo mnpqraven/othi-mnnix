@@ -4,11 +4,11 @@ import { Greeter } from "@repo/protocol/proto_ts/helloworld_pb";
 import { rpcClient } from "@repo/protocol/rpc";
 import { Button } from "@repo/ui/primitive/button";
 import { queryOptions, useQuery } from "@tanstack/react-query";
-import { createFileRoute, getRouteApi } from "@tanstack/react-router";
+import { getRouteApi } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import ky from "ky";
 
-export const Route = createFileRoute("/blog/")({
+export const Route = createFileRoute({
   component: RouteComponent,
   loader: () => serverGreetApi(),
 });

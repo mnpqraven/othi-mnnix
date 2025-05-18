@@ -3,5 +3,5 @@ export const Route = createFileRoute({
 });
 
 function RouteComponent() {
-  return <div>Hello "/sudo/table/blog/"!</div>;
+  return <div>Hello "/whoami"!</div>;
 }

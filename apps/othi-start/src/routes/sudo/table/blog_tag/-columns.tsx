@@ -31,8 +31,8 @@ export const blogTagsColumns = [
         <div className="flex gap-2">
           <Dialog>
             <DialogTrigger asChild>
-              <Button>
-                <Pen />
+              <Button size="icon" variant="outline">
+                <Pen className="size-4" />
               </Button>
             </DialogTrigger>
             <DialogContent>
@@ -52,8 +52,8 @@ export const blogTagsColumns = [
               });
             }}
           >
-            <Button>
-              <Trash />
+            <Button variant="outline" size="icon">
+              <Trash className="size-4" />
             </Button>
           </ConfirmPopover>
         </div>

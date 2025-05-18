@@ -8,63 +8,72 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import type { CreateFileRoute, FileRoutesByPath } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as SudoIndexImport } from './routes/sudo/index'
-import { Route as FormIndexImport } from './routes/form/index'
-import { Route as BlogIndexImport } from './routes/blog/index'
-import { Route as FormServerActionImport } from './routes/form/server-action'
-import { Route as FormBasicImport } from './routes/form/basic'
-import { Route as SudoTableBlogtagIndexImport } from './routes/sudo/table/blog_tag/index'
-import { Route as SudoTableBlogIndexImport } from './routes/sudo/table/blog/index'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as WhoamiIndexRouteImport } from './routes/whoami/index'
+import { Route as SudoIndexRouteImport } from './routes/sudo/index'
+import { Route as FormIndexRouteImport } from './routes/form/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as FormServerActionRouteImport } from './routes/form/server-action'
+import { Route as FormBasicRouteImport } from './routes/form/basic'
+import { Route as SudoTableBlog_tagIndexRouteImport } from './routes/sudo/table/blog_tag/index'
+import { Route as SudoTableBlogIndexRouteImport } from './routes/sudo/table/blog/index'
 
 // Create/Update Routes
 
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const SudoIndexRoute = SudoIndexImport.update({
+const WhoamiIndexRoute = WhoamiIndexRouteImport.update({
+  id: '/whoami/',
+  path: '/whoami/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SudoIndexRoute = SudoIndexRouteImport.update({
   id: '/sudo/',
   path: '/sudo/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const FormIndexRoute = FormIndexImport.update({
+const FormIndexRoute = FormIndexRouteImport.update({
   id: '/form/',
   path: '/form/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const BlogIndexRoute = BlogIndexImport.update({
+const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const FormServerActionRoute = FormServerActionImport.update({
+const FormServerActionRoute = FormServerActionRouteImport.update({
   id: '/form/server-action',
   path: '/form/server-action',
   getParentRoute: () => rootRoute,
 } as any)
 
-const FormBasicRoute = FormBasicImport.update({
+const FormBasicRoute = FormBasicRouteImport.update({
   id: '/form/basic',
   path: '/form/basic',
   getParentRoute: () => rootRoute,
 } as any)
 
-const SudoTableBlogtagIndexRoute = SudoTableBlogtagIndexImport.update({
+const SudoTableBlog_tagIndexRoute = SudoTableBlog_tagIndexRouteImport.update({
   id: '/sudo/table/blog_tag/',
   path: '/sudo/table/blog_tag/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const SudoTableBlogIndexRoute = SudoTableBlogIndexImport.update({
+const SudoTableBlogIndexRoute = SudoTableBlogIndexRouteImport.update({
   id: '/sudo/table/blog/',
   path: '/sudo/table/blog/',
   getParentRoute: () => rootRoute,
@@ -78,59 +87,150 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRoute
     }
     '/form/basic': {
       id: '/form/basic'
       path: '/form/basic'
       fullPath: '/form/basic'
-      preLoaderRoute: typeof FormBasicImport
+      preLoaderRoute: typeof FormBasicRouteImport
       parentRoute: typeof rootRoute
     }
     '/form/server-action': {
       id: '/form/server-action'
       path: '/form/server-action'
       fullPath: '/form/server-action'
-      preLoaderRoute: typeof FormServerActionImport
+      preLoaderRoute: typeof FormServerActionRouteImport
       parentRoute: typeof rootRoute
     }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
       fullPath: '/blog'
-      preLoaderRoute: typeof BlogIndexImport
+      preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRoute
     }
     '/form/': {
       id: '/form/'
       path: '/form'
       fullPath: '/form'
-      preLoaderRoute: typeof FormIndexImport
+      preLoaderRoute: typeof FormIndexRouteImport
       parentRoute: typeof rootRoute
     }
     '/sudo/': {
       id: '/sudo/'
       path: '/sudo'
       fullPath: '/sudo'
-      preLoaderRoute: typeof SudoIndexImport
+      preLoaderRoute: typeof SudoIndexRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/whoami/': {
+      id: '/whoami/'
+      path: '/whoami'
+      fullPath: '/whoami'
+      preLoaderRoute: typeof WhoamiIndexRouteImport
       parentRoute: typeof rootRoute
     }
     '/sudo/table/blog/': {
       id: '/sudo/table/blog/'
       path: '/sudo/table/blog'
       fullPath: '/sudo/table/blog'
-      preLoaderRoute: typeof SudoTableBlogIndexImport
+      preLoaderRoute: typeof SudoTableBlogIndexRouteImport
       parentRoute: typeof rootRoute
     }
     '/sudo/table/blog_tag/': {
       id: '/sudo/table/blog_tag/'
       path: '/sudo/table/blog_tag'
       fullPath: '/sudo/table/blog_tag'
-      preLoaderRoute: typeof SudoTableBlogtagIndexImport
+      preLoaderRoute: typeof SudoTableBlog_tagIndexRouteImport
       parentRoute: typeof rootRoute
     }
   }
+}
+
+// Add type-safety to the createFileRoute function across the route tree
+
+declare module './routes/index' {
+  const createFileRoute: CreateFileRoute<
+    '/',
+    FileRoutesByPath['/']['parentRoute'],
+    FileRoutesByPath['/']['id'],
+    FileRoutesByPath['/']['path'],
+    FileRoutesByPath['/']['fullPath']
+  >
+}
+declare module './routes/form/basic' {
+  const createFileRoute: CreateFileRoute<
+    '/form/basic',
+    FileRoutesByPath['/form/basic']['parentRoute'],
+    FileRoutesByPath['/form/basic']['id'],
+    FileRoutesByPath['/form/basic']['path'],
+    FileRoutesByPath['/form/basic']['fullPath']
+  >
+}
+declare module './routes/form/server-action' {
+  const createFileRoute: CreateFileRoute<
+    '/form/server-action',
+    FileRoutesByPath['/form/server-action']['parentRoute'],
+    FileRoutesByPath['/form/server-action']['id'],
+    FileRoutesByPath['/form/server-action']['path'],
+    FileRoutesByPath['/form/server-action']['fullPath']
+  >
+}
+declare module './routes/blog/index' {
+  const createFileRoute: CreateFileRoute<
+    '/blog/',
+    FileRoutesByPath['/blog/']['parentRoute'],
+    FileRoutesByPath['/blog/']['id'],
+    FileRoutesByPath['/blog/']['path'],
+    FileRoutesByPath['/blog/']['fullPath']
+  >
+}
+declare module './routes/form/index' {
+  const createFileRoute: CreateFileRoute<
+    '/form/',
+    FileRoutesByPath['/form/']['parentRoute'],
+    FileRoutesByPath['/form/']['id'],
+    FileRoutesByPath['/form/']['path'],
+    FileRoutesByPath['/form/']['fullPath']
+  >
+}
+declare module './routes/sudo/index' {
+  const createFileRoute: CreateFileRoute<
+    '/sudo/',
+    FileRoutesByPath['/sudo/']['parentRoute'],
+    FileRoutesByPath['/sudo/']['id'],
+    FileRoutesByPath['/sudo/']['path'],
+    FileRoutesByPath['/sudo/']['fullPath']
+  >
+}
+declare module './routes/whoami/index' {
+  const createFileRoute: CreateFileRoute<
+    '/whoami/',
+    FileRoutesByPath['/whoami/']['parentRoute'],
+    FileRoutesByPath['/whoami/']['id'],
+    FileRoutesByPath['/whoami/']['path'],
+    FileRoutesByPath['/whoami/']['fullPath']
+  >
+}
+declare module './routes/sudo/table/blog/index' {
+  const createFileRoute: CreateFileRoute<
+    '/sudo/table/blog/',
+    FileRoutesByPath['/sudo/table/blog/']['parentRoute'],
+    FileRoutesByPath['/sudo/table/blog/']['id'],
+    FileRoutesByPath['/sudo/table/blog/']['path'],
+    FileRoutesByPath['/sudo/table/blog/']['fullPath']
+  >
+}
+declare module './routes/sudo/table/blog_tag/index' {
+  const createFileRoute: CreateFileRoute<
+    '/sudo/table/blog_tag/',
+    FileRoutesByPath['/sudo/table/blog_tag/']['parentRoute'],
+    FileRoutesByPath['/sudo/table/blog_tag/']['id'],
+    FileRoutesByPath['/sudo/table/blog_tag/']['path'],
+    FileRoutesByPath['/sudo/table/blog_tag/']['fullPath']
+  >
 }
 
 // Create and export the route tree
@@ -142,8 +242,9 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogIndexRoute
   '/form': typeof FormIndexRoute
   '/sudo': typeof SudoIndexRoute
+  '/whoami': typeof WhoamiIndexRoute
   '/sudo/table/blog': typeof SudoTableBlogIndexRoute
-  '/sudo/table/blog_tag': typeof SudoTableBlogtagIndexRoute
+  '/sudo/table/blog_tag': typeof SudoTableBlog_tagIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -153,8 +254,9 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/form': typeof FormIndexRoute
   '/sudo': typeof SudoIndexRoute
+  '/whoami': typeof WhoamiIndexRoute
   '/sudo/table/blog': typeof SudoTableBlogIndexRoute
-  '/sudo/table/blog_tag': typeof SudoTableBlogtagIndexRoute
+  '/sudo/table/blog_tag': typeof SudoTableBlog_tagIndexRoute
 }
 
 export interface FileRoutesById {
@@ -165,8 +267,9 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/form/': typeof FormIndexRoute
   '/sudo/': typeof SudoIndexRoute
+  '/whoami/': typeof WhoamiIndexRoute
   '/sudo/table/blog/': typeof SudoTableBlogIndexRoute
-  '/sudo/table/blog_tag/': typeof SudoTableBlogtagIndexRoute
+  '/sudo/table/blog_tag/': typeof SudoTableBlog_tagIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -178,6 +281,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/form'
     | '/sudo'
+    | '/whoami'
     | '/sudo/table/blog'
     | '/sudo/table/blog_tag'
   fileRoutesByTo: FileRoutesByTo
@@ -188,6 +292,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/form'
     | '/sudo'
+    | '/whoami'
     | '/sudo/table/blog'
     | '/sudo/table/blog_tag'
   id:
@@ -198,6 +303,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/form/'
     | '/sudo/'
+    | '/whoami/'
     | '/sudo/table/blog/'
     | '/sudo/table/blog_tag/'
   fileRoutesById: FileRoutesById
@@ -210,8 +316,9 @@ export interface RootRouteChildren {
   BlogIndexRoute: typeof BlogIndexRoute
   FormIndexRoute: typeof FormIndexRoute
   SudoIndexRoute: typeof SudoIndexRoute
+  WhoamiIndexRoute: typeof WhoamiIndexRoute
   SudoTableBlogIndexRoute: typeof SudoTableBlogIndexRoute
-  SudoTableBlogtagIndexRoute: typeof SudoTableBlogtagIndexRoute
+  SudoTableBlog_tagIndexRoute: typeof SudoTableBlog_tagIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -221,8 +328,9 @@ const rootRouteChildren: RootRouteChildren = {
   BlogIndexRoute: BlogIndexRoute,
   FormIndexRoute: FormIndexRoute,
   SudoIndexRoute: SudoIndexRoute,
+  WhoamiIndexRoute: WhoamiIndexRoute,
   SudoTableBlogIndexRoute: SudoTableBlogIndexRoute,
-  SudoTableBlogtagIndexRoute: SudoTableBlogtagIndexRoute,
+  SudoTableBlog_tagIndexRoute: SudoTableBlog_tagIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -241,6 +349,7 @@ export const routeTree = rootRoute
         "/blog/",
         "/form/",
         "/sudo/",
+        "/whoami/",
         "/sudo/table/blog/",
         "/sudo/table/blog_tag/"
       ]
@@ -262,6 +371,9 @@ export const routeTree = rootRoute
     },
     "/sudo/": {
       "filePath": "sudo/index.tsx"
+    },
+    "/whoami/": {
+      "filePath": "whoami/index.tsx"
     },
     "/sudo/table/blog/": {
       "filePath": "sudo/table/blog/index.tsx"

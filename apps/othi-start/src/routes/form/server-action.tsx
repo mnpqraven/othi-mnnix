@@ -10,7 +10,6 @@ import {
   createServerValidate,
   getFormData,
 } from "@tanstack/react-form/start";
-import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { setResponseStatus } from "@tanstack/react-start/server";
 
@@ -60,7 +59,7 @@ const getFormDataFromServer = createServerFn({ method: "GET" }).handler(
   },
 );
 
-export const Route = createFileRoute("/form/server-action")({
+export const Route = createFileRoute({
   component: RouteComponent,
   loader: async () => ({
     state: await getFormDataFromServer(),
