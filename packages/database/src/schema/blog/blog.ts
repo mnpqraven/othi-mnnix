@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { crudSchema } from "../../../src/utils";
 import { ulid } from "ulid";
+import { crudSchema } from "../../../src/utils";
 
 export const blogs = sqliteTable("blogs", {
   id: text("blog_id").primaryKey(),
