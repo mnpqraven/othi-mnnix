@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { crudSchema } from "src/utils";
+import { crudSchema } from "../../../src/utils";
 import { ulid } from "ulid";
 
 export const blogs = sqliteTable("blogs", {

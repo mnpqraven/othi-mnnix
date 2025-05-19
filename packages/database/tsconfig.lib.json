@@ -4,11 +4,9 @@
     "baseUrl": ".",
     "rootDir": "src",
     "outDir": "dist",
-    "module": "esnext",
-    "moduleResolution": "bundler",
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": false,
-    "types": ["node"]
+    "types": ["node", "vite/client"]
   },
   "include": ["src/**/*.ts"],
   "references": [
