@@ -1,6 +1,3 @@
-[submodule "crates/vps"]
-	path = crates/vps
-	url = git@github.com:mnpqraven/vps.git
 [submodule "packages/protocol/src/proto"]
 	path = packages/protocol/src/proto
 	url = git@github.com:mnpqraven/vps-proto.git
