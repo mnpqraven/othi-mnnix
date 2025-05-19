@@ -159,6 +159,9 @@ importers:
       '@uploadthing/react':
         specifier: ^7.3.1
         version: 7.3.1(next@15.2.5(@babel/core@7.27.1)(babel-plugin-macros@3.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.87.0))(react@19.1.0)(uploadthing@7.7.2(express@4.21.2)(h3@1.15.3)(next@15.2.5(@babel/core@7.27.1)(babel-plugin-macros@3.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.87.0))(tailwindcss@4.1.4))
+      '@uploadthing/shared':
+        specifier: ^7.1.8
+        version: 7.1.8
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -433,6 +436,9 @@ importers:
       '@connectrpc/connect-web':
         specifier: ^2.0.2
         version: 2.0.2(@bufbuild/protobuf@2.4.0)(@connectrpc/connect@2.0.2(@bufbuild/protobuf@2.4.0))
+      '@libsql/client':
+        specifier: ^0.15.4
+        version: 0.15.4
       '@repo/auth':
         specifier: workspace:*
         version: link:../auth
@@ -7910,7 +7916,6 @@ packages:
     resolution: {integrity: sha512-Quz3MvAwHxVYNXsOByL7xI5EB2WYOeFswqaHIA3qOK3isRWTxiplBEocmmru6XmxDB2L7jDNYtYA4FyimoAFEw==}
     engines: {node: '>=8.17.0'}
     hasBin: true
-    bundledDependencies: []
 
   jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -8011,6 +8016,7 @@ packages:
 
   libsql@0.5.8:
     resolution: {integrity: sha512-+OopMI1wM/NvAJTHf3O3+beHd1YfKLnSVsOGBl3/7UBDZ4ydVadkbBk5Hjjs9d3ALC5rBaftMY59AvwyC8MzPw==}
+    cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
   license-webpack-plugin@4.0.2:

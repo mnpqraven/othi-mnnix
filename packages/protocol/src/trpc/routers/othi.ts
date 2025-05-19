@@ -1,5 +1,6 @@
-import { LibsqlError, db } from "@repo/database";
-import { blogTags, insertBlogTagSchema } from "@repo/database/schema";
+import { LibsqlError } from "@libsql/client";
+import { db } from "@repo/database";
+import { BlogTagSchemas, blogTags } from "@repo/database/schema";
 import { TRPCError } from "@trpc/server";
 import { publicProcedure, router, superAdminProcedure } from "../trpc";
 
@@ -13,7 +14,7 @@ export const othiRouter = router({
       return data;
     }),
     create: superAdminProcedure
-      .input(insertBlogTagSchema)
+      .input(BlogTagSchemas.create)
       .mutation(async ({ input }) => {
         try {
           return db.insert(blogTags).values(input).returning();

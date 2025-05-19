@@ -1,5 +1,5 @@
 import { db } from "@repo/database";
-import { blogs, insertBlogSchema } from "@repo/database/schema";
+import { BlogSchemas, blogs } from "@repo/database/schema";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 import { utapi } from "../../../server/uploadthing";
@@ -8,13 +8,7 @@ import { authedProcedure, router } from "../../trpc";
 export const blogUtilsRouter = router({
   update: {
     blogMeta: authedProcedure
-      .input(
-        insertBlogSchema.pick({
-          id: true,
-          mdUrl: true,
-          fileName: true,
-        }),
-      )
+      .input(BlogSchemas.select.pick("id", "mdUrl", "fileName"))
       .mutation(async ({ input }) => {
         const { id: blogId, mdUrl, fileName } = input;
 

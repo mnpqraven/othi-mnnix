@@ -28,6 +28,7 @@
     "@bufbuild/protoc-gen-es": "^2.4.0",
     "@connectrpc/connect": "^2.0.2",
     "@connectrpc/connect-web": "^2.0.2",
+    "@libsql/client": "^0.15.4",
     "@repo/auth": "workspace:*",
     "@repo/database": "workspace:*",
     "@repo/env": "workspace:*",
