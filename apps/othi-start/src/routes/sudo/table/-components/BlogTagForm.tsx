@@ -3,32 +3,42 @@ import { BlogTagSchemas } from "@repo/database/schema";
 import { Button } from "@repo/ui/primitive/button";
 import { toast } from "@repo/ui/primitive/sonner";
 import { useRouter } from "@tanstack/react-router";
-import { type BlogTagSchema, blogTagCRUD } from "../blog_tag/-blog_tag_server";
+import { blogTagById, blogTagCRUD } from "../blog_tag/-blog_tag_server";
 
 interface Props {
-  defaultValues?: BlogTagSchema;
+  defaultValues?: typeof BlogTagSchemas.create.infer;
   mode: "create" | "update";
+  onSuccess?: (data: typeof BlogTagSchemas.create.infer) => void;
 }
 
-export function BlogTagForm({ defaultValues, mode = "create" }: Props) {
+export function BlogTagForm({
+  defaultValues = {
+    code: "",
+    label: "",
+  },
+  mode = "create",
+  onSuccess,
+}: Props) {
   const router = useRouter();
   const form = useForm({
     defaultValues,
     validators: {
-      // we are validating twice, maybe server side form only ?
       onChange: BlogTagSchemas[mode],
     },
     onSubmit: async ({ value, formApi }) => {
       console.log("form value", value);
 
-      await blogTagCRUD[mode]({ data: value });
+      try {
+        await blogTagCRUD[mode]({ data: value });
 
-      toast.success(`blog tag ${mode}d`);
-      router.invalidate();
-      formApi.reset();
-    },
-    onSubmitInvalid: () => {
-      console.log("trigger onSubmitInvalid");
+        toast.success(`blog tag ${mode}d`);
+        formApi.reset();
+        router.invalidate();
+        if (onSuccess) onSuccess(value);
+      } catch (e) {
+        console.log(e);
+        toast.error((e as { code: string }).code);
+      }
     },
   });
 
@@ -42,11 +52,23 @@ export function BlogTagForm({ defaultValues, mode = "create" }: Props) {
       <div className="flex gap-2">
         <form.AppField
           name="code"
-          children={(field) => <field.Input labelText="Code" />}
+          validators={{
+            onChangeAsyncDebounceMs: 300,
+            onChangeAsync: async ({ value: code }) => {
+              if ((await blogTagById({ data: { code } })) !== undefined)
+                return "exists";
+              return undefined;
+            },
+          }}
+          children={(field) => (
+            <field.Input autoComplete="off" labelText="Code" />
+          )}
         />
         <form.AppField
           name="label"
-          children={(field) => <field.Input labelText="Label" />}
+          children={(field) => (
+            <field.Input autoComplete="off" labelText="Label" />
+          )}
         />
 
         <Button

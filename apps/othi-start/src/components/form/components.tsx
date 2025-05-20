@@ -1,23 +1,35 @@
 import { Input } from "@repo/ui/primitive/input";
 import { Label } from "@repo/ui/primitive/label";
-import { useId } from "react";
+import { type ComponentPropsWithRef, useId } from "react";
 import { useFieldContext } from ".";
 
-export function FormInput({ labelText }: { labelText?: string }) {
-  const field = useFieldContext<string>();
+interface Props
+  extends Omit<
+    ComponentPropsWithRef<typeof Input>,
+    "id" | "value" | "onChange"
+  > {
+  labelText?: string;
+}
+
+export function FormInput({ labelText, ...props }: Props) {
+  const { state, handleChange, handleBlur } = useFieldContext<string>();
   const id = useId();
+  const { meta } = state;
+  const showErrorCond =
+    (!meta.isValid || !meta.isDefaultValue) && meta.errors.length;
+
   return (
     <div className="space-y-2">
       {labelText?.length ? <Label htmlFor={id}>{labelText}</Label> : null}
       <Input
         id={id}
-        value={field.state.value}
-        onChange={(e) => field.handleChange(e.target.value)}
+        value={state.value}
+        onBlur={handleBlur}
+        onChange={(e) => handleChange(e.target.value)}
+        {...props}
       />
-      {field.state.meta.errors.length ? (
-        <span className="text-destructive">
-          {field.state.meta.errors.join(", ")}
-        </span>
+      {showErrorCond ? (
+        <span className="text-destructive">{meta.errors.join(", ")}</span>
       ) : null}
     </div>
   );

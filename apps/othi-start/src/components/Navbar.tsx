@@ -12,7 +12,7 @@ export function Navbar({ className, ...props }: ComponentPropsWithRef<"div">) {
   return (
     <div
       className={cn(
-        "sticky top-0 z-50 flex items-center justify-between gap-2 border-b px-4 py-1 duration-200",
+        "sticky top-0 z-50 flex items-center justify-between gap-2 border-b px-4 py-1",
         isScrolled ? "bg-background/50 backdrop-blur-md" : "bg-background",
         className,
       )}

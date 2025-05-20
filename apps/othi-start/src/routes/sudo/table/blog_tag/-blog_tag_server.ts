@@ -4,6 +4,14 @@ import { BlogTagSchemas, blogTags } from "@repo/database/schema";
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
 
+export const blogTagById = createServerFn({ method: "GET" })
+  .validator(BlogTagSchemas.select.pick("code"))
+  .handler(async ({ data }) => {
+    return db.query.blogTags.findFirst({
+      where: ({ code }, op) => op.eq(code, data.code),
+    });
+  });
+
 export const blogTagList = createServerFn({ method: "GET" }).handler(
   async () => {
     // TODO: params
