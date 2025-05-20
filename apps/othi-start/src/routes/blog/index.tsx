@@ -61,12 +61,13 @@ const greetApiOptions = () =>
     queryKey: ["api", "greet"],
     queryFn: () =>
       ky
-        .post(`${env.HOST_VPS_API}/api/rpcgreet`, {
+        // FIXME: can't access env from client
+        .post<{ message: string }>("http://localhost:5000/api/rpcgreet", {
           json: { name: "othi from browser" },
         })
-        .text(),
+        .json(),
   });
 function ApiQueryDemo() {
   const { data } = useQuery(greetApiOptions());
-  return <div className="">api query demo: {data}</div>;
+  return <div className="">api query demo: {data?.message}</div>;
 }
