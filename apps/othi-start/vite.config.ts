@@ -24,4 +24,10 @@ export default defineConfig({
       ],
     },
   },
+  build: {
+    rollupOptions: {
+      // External packages that should not be bundled into your library.
+      external: ["pg-cloudflare"],
+    },
+  },
 });
