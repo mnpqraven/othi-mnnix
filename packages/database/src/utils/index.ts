@@ -3,9 +3,9 @@ import {
   createSelectSchema,
   createUpdateSchema,
 } from "drizzle-arktype";
-import type { SQLiteTable } from "drizzle-orm/sqlite-core";
+import type { PgTable } from "drizzle-orm/pg-core";
 
-export function crudSchema<T extends SQLiteTable>(table: T) {
+export function crudSchema<T extends PgTable>(table: T) {
   return {
     create: createInsertSchema(table),
     update: createUpdateSchema(table),

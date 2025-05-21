@@ -4,7 +4,6 @@ import { type } from "arktype";
 export const databaseEnv = createEnv({
   server: {
     DB_URL: type("string"),
-    DB_AUTH_TOKEN: type("string"),
     UPLOADTHING_TOKEN: type("string"),
   },
   client: {},

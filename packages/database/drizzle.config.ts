@@ -4,10 +4,10 @@ import type { Config } from "drizzle-kit";
 export default {
   schema: "src/schema/*",
   out: "src/drizzle",
-  dialect: "turso",
+  dialect: "postgresql",
   dbCredentials: {
     url: env.DB_URL,
-    authToken: env.DB_AUTH_TOKEN,
+    database: "mydatabase",
   },
   verbose: true,
 } satisfies Config;

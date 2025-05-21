@@ -1,13 +1,12 @@
-import { LibsqlError } from "@libsql/client";
 import { db } from "@repo/database";
-import { BlogTagSchemas, blogTags } from "@repo/database/schema";
+import { BlogTagSchemas, tags } from "@repo/database/schema";
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
 
 export const blogTagById = createServerFn({ method: "GET" })
   .validator(BlogTagSchemas.select.pick("code"))
   .handler(async ({ data }) => {
-    return db.query.blogTags.findFirst({
+    return db.query.tags.findFirst({
       where: ({ code }, op) => op.eq(code, data.code),
     });
   });
@@ -15,7 +14,7 @@ export const blogTagById = createServerFn({ method: "GET" })
 export const blogTagList = createServerFn({ method: "GET" }).handler(
   async () => {
     // TODO: params
-    return db.query.blogTags.findMany();
+    return db.query.tags.findMany();
   },
 );
 
@@ -23,18 +22,18 @@ export const blogTagCreate = createServerFn({ method: "POST" })
   .validator(BlogTagSchemas.create)
   .handler(async ({ data }) => {
     try {
-      await db.insert(blogTags).values(data);
+      await db.insert(tags).values(data);
     } catch (e) {
       // TODO: libsql handling
 
-      console.log("from server", e instanceof LibsqlError);
-      if (e instanceof LibsqlError) {
-        // TODO: own handler
-        // SQLITE_CONSTRAINT
-        console.log("inner", e);
-        console.log("inner", e.code);
-        console.log("inner", e.cause);
-      }
+      console.log("from server");
+      // if (e instanceof LibsqlError) {
+      //   // TODO: own handler
+      //   // SQLITE_CONSTRAINT
+      //   console.log("inner", e);
+      //   console.log("inner", e.code);
+      //   console.log("inner", e.cause);
+      // }
       throw e;
     }
   });
@@ -42,7 +41,7 @@ export const blogTagCreate = createServerFn({ method: "POST" })
 export const blogTagDelete = createServerFn({ method: "POST" })
   .validator(BlogTagSchemas.select.pick("id"))
   .handler(async ({ data }) => {
-    await db.delete(blogTags).where(eq(blogTags.id, data.id));
+    await db.delete(tags).where(eq(tags.id, data.id));
   });
 
 export const blogTagUpdate = createServerFn({ method: "POST" })
@@ -51,9 +50,9 @@ export const blogTagUpdate = createServerFn({ method: "POST" })
   .validator(BlogTagSchemas.update)
   .handler(async ({ data }) => {
     await db
-      .update(blogTags)
+      .update(tags)
       .set(data)
-      .where(eq(blogTags.id, data.id ?? ""));
+      .where(eq(tags.id, data.id ?? ""));
   });
 
 export const blogTagCRUD = {
