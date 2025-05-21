@@ -1,8 +1,7 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { BlogTag } from "@repo/database/schema";
-import { insertBlogTagSchema } from "@repo/database/schema";
+import { arktypeResolver } from "@hookform/resolvers/arktype";
+import { BlogTagSchemas } from "@repo/database/schema";
 import { useTRPC } from "@repo/protocol/trpc/react";
 import { Button } from "@repo/ui/primitive/button";
 import {
@@ -19,8 +18,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 
 export function BlogTagForm() {
-  const form = useForm<BlogTag>({
-    resolver: zodResolver(insertBlogTagSchema),
+  const form = useForm({
+    resolver: arktypeResolver(BlogTagSchemas.create),
     defaultValues: {
       label: "",
       code: "",
@@ -42,7 +41,7 @@ export function BlogTagForm() {
     <Form {...form}>
       <form
         className="flex gap-4"
-        onSubmit={form.handleSubmit((e: BlogTag) => {
+        onSubmit={form.handleSubmit((e) => {
           mutate(e);
         })}
       >

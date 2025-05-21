@@ -1,10 +1,10 @@
-import { LibsqlError, db } from "@repo/database";
+import { LibsqlError } from "@libsql/client";
+import { db } from "@repo/database";
 import {
+  BlogSchemas,
   blogs,
   blogsAndTags,
-  insertBlogSchema,
   medias,
-  selectBlogSchema,
 } from "@repo/database/schema";
 import { generateUlid } from "@repo/lib";
 import { TRPCError } from "@trpc/server";
@@ -43,7 +43,10 @@ async function getBlogs() {
 async function getBlog({
   id,
   tags = false,
-}: Pick<z.TypeOf<typeof selectBlogSchema>, "id"> & { tags?: boolean }) {
+}: {
+  id: (typeof BlogSchemas.select.infer)["id"];
+  tags?: boolean;
+}) {
   const start = performance.now();
   if (tags) {
     const query = await db.query.blogs.findFirst({
@@ -124,22 +127,16 @@ async function updateMarkdownFile(input: {
     console.log("error encountered", res?.error);
     return undefined;
   }
-  const { key, name, url } = res.data;
-  return { fileName: name, fileKey: key, mdUrl: url };
+  const { key, name, ufsUrl } = res.data;
+  return { fileName: name, fileKey: key, mdUrl: ufsUrl };
 }
 
-const createMetaSchema = insertBlogSchema.pick({
-  title: true,
-  mdUrl: true,
-  fileName: true,
-  fileKey: true,
-});
-async function createMeta(input: z.TypeOf<typeof createMetaSchema>) {
-  const { title, mdUrl, fileName, fileKey } = input;
+async function createMeta(input: typeof BlogSchemas.create.infer) {
+  const { title, mdUrl, fileName, fileKey, id } = input;
   const metaReq = await db
     .insert(blogs)
     .values({
-      id: generateUlid(),
+      id,
       title,
       mdUrl,
       fileName,
@@ -149,10 +146,15 @@ async function createMeta(input: z.TypeOf<typeof createMetaSchema>) {
   return metaReq.at(0);
 }
 
-const updateParamSchema = insertBlogSchema.partial().required({ id: true });
-async function updateMeta(input: z.TypeOf<typeof updateParamSchema>) {
+async function updateMeta(input: typeof BlogSchemas.update.infer) {
   try {
     const { id: blogId, ...rest } = input;
+
+    if (!blogId)
+      throw new TRPCError({
+        code: "BAD_REQUEST",
+        message: "undefined blog id",
+      });
 
     if (rest.mdUrl) revalidatePath(rest.mdUrl);
 
@@ -258,12 +260,13 @@ async function createBlog({
 
   if (!mdBlob) return { success: false as const, error: "updatedMD is null" };
 
-  const { name, url, key } = mdBlob;
+  const { name, ufsUrl, key } = mdBlob;
   const createdMeta = await createMeta({
+    id: generateUlid(),
     title,
     fileKey: key,
     fileName: name,
-    mdUrl: url,
+    mdUrl: ufsUrl,
   });
   if (tags && createdMeta)
     await createTagsBinds({ blogId: createdMeta.id, tags });
@@ -284,9 +287,9 @@ export const blogRouter = router({
     }),
   byId: publicProcedure
     .input(
-      selectBlogSchema
-        .pick({ id: true })
-        .extend({ tags: z.boolean().optional().default(false) }),
+      BlogSchemas.select.pick("id").merge({
+        tags: "boolean = false",
+      }),
     )
     .query(async ({ input }) => {
       const { id, tags } = input;
@@ -318,7 +321,7 @@ export const blogRouter = router({
       .input(createBlogSchema)
       .mutation(({ input }) => createBlog(input)),
     meta: superAdminProcedure
-      .input(createMetaSchema)
+      .input(BlogSchemas.create)
       .mutation(({ input }) => createMeta(input)),
     /**
      * uploads a markdown file to UT bucket
@@ -338,7 +341,7 @@ export const blogRouter = router({
       .input(updateBlogSchema)
       .mutation(({ input }) => updateBlog(input)),
     meta: superAdminProcedure
-      .input(updateParamSchema)
+      .input(BlogSchemas.update)
       .mutation(({ input }) => updateMeta(input)),
     /**
      * this replaces a markdown file on UT by uploading the new file and delete the old file
@@ -411,12 +414,12 @@ export const blogRouter = router({
         // NOTE: upload meta to db
 
         const _metaRes = await Promise.all(
-          validResponses.map(async ({ name, url }) => {
+          validResponses.map(async ({ name, ufsUrl }) => {
             const req = await db
               .insert(medias)
               .values({
                 fileName: name,
-                mediaUrl: url,
+                mediaUrl: ufsUrl,
                 tempBlogId: input.tempBlogId,
               })
               .returning();
@@ -447,7 +450,7 @@ export const blogRouter = router({
       }),
   },
   delete: superAdminProcedure
-    .input(selectBlogSchema.pick({ id: true }))
+    .input(BlogSchemas.update.pick("id").required())
     .mutation(async ({ input }) => {
       await db.delete(blogs).where(eq(blogs.id, input.id));
     }),

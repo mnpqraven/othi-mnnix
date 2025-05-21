@@ -7,7 +7,7 @@ export interface CommandAtomShape {
   searchInput: string;
 }
 
-interface CommandAtomAction {
+export interface CommandAtomAction {
   goLevel: { levelName: string };
   goParent: undefined;
   toggleOpen: boolean | undefined;

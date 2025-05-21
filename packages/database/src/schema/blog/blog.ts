@@ -1,41 +1,20 @@
-import { sql } from "drizzle-orm";
-import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { boolean, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
+import { ulid } from "ulid";
+import { crudSchema } from "../../../src/utils";
 
-export const blogs = sqliteTable("blogs", {
-  id: text("blog_id").primaryKey(),
-  title: text("title", { length: 256 }).notNull(),
-  fileName: text("file_name", { length: 256 }).notNull(),
-  fileKey: text("file_key", { length: 256 }).notNull(),
-  publish: int("publish", { mode: "boolean" }).default(false),
-  mdUrl: text("md_url").notNull(),
-  createdAt: int("created_at", { mode: "timestamp" })
-    .notNull()
-    .default(sql`(unixepoch())`),
-  updatedAt: int("updated_at", { mode: "timestamp" })
-    .notNull()
-    .default(sql`(unixepoch())`),
+export const blogs = pgTable("blogs", {
+  id: varchar({ length: 255 }).primaryKey().$defaultFn(ulid),
+  title: varchar({ length: 255 }).notNull(),
+  fileName: varchar({ length: 255 }).notNull(),
+  fileKey: varchar({ length: 255 }).notNull(),
+  publish: boolean().default(false),
+  mdUrl: varchar().notNull(),
+  createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
 });
 
-export const insertBlogSchema = createInsertSchema(blogs, {
-  title: (schema) =>
-    schema.min(1, {
-      message: "Blog title must be at least 1 character long",
-    }),
-});
-export const selectBlogSchema = createSelectSchema(blogs);
+// TODO: refinements
+export const BlogSchemas = crudSchema(blogs);
 
 export type Blog = typeof blogs.$inferSelect;
 export type BlogInsert = typeof blogs.$inferInsert;
-
-export const blogTags = sqliteTable("blog_tag", {
-  code: text("code").primaryKey().notNull(),
-  label: text("label", { length: 256 }).notNull(),
-});
-
-export const insertBlogTagSchema = createInsertSchema(blogTags, {
-  code: (schema) => schema.min(1, { message: "Required" }),
-  label: (schema) => schema.min(1, { message: "Required" }),
-});
-
-export type BlogTag = typeof blogTags.$inferSelect;

@@ -1,15 +1,12 @@
-import { createClient } from "@libsql/client/web";
-import { drizzle } from "drizzle-orm/libsql";
-import { migrate } from "drizzle-orm/libsql/migrator";
-import { z } from "zod";
+import { databaseEnv as env } from "@repo/env-agnostic";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { migrate } from "drizzle-orm/node-postgres/migrator";
 
-// automatically run needed migrations on the database
-const client = createClient({
-  url: z.string().parse(process.env.DB_URL),
-  authToken: z.string().parse(process.env.DB_AUTH_TOKEN),
+const db = drizzle({
+  connection: {
+    connectionString: env.DB_URL,
+  },
 });
-
-const db = drizzle(client);
 
 console.log("migrating db...");
 

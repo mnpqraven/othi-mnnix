@@ -4,7 +4,6 @@ import { z } from "zod";
 export const storageEnv = createEnv({
   server: {
     DB_URL: z.string(),
-    DB_AUTH_TOKEN: z.string(),
     UPLOADTHING_TOKEN: z.string(),
   },
   client: {},
