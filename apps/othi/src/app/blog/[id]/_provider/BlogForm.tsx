@@ -45,7 +45,7 @@ export function BlogForm({
         <div className="grid grid-cols-2 gap-2">
           <FormField
             control={form.control}
-            name="tags"
+            name="tag_ids"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Tags</FormLabel>

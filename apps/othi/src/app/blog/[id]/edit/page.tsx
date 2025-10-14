@@ -24,7 +24,7 @@ export default async function Page({ params }: Params) {
   const { meta, contentHtml } = data;
 
   // flatten the tags, we don't need the labels
-  const tags = "tags" in meta ? meta.tags.map((e) => e.code) : undefined;
+  const tag_ids = "tags" in meta ? meta.tags.map((e) => e.id) : [];
 
   return (
     <div className="flex flex-col gap-2">
@@ -42,7 +42,11 @@ export default async function Page({ params }: Params) {
         </span>
       </div>
 
-      <BlogFormProvider defaultValue={{ ...meta, tags }} id={id} mode="update">
+      <BlogFormProvider
+        defaultValue={{ ...meta, tag_ids }}
+        id={id}
+        mode="update"
+      >
         <BlogForm />
 
         <EditorProvider content={contentHtml}>

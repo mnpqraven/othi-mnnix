@@ -4,7 +4,7 @@
   "include": [],
   "references": [
     {
-      "path": "../env"
+      "path": "../env-agnostic"
     },
     {
       "path": "./tsconfig.lib.json"
