@@ -41,7 +41,7 @@ export function EditorSubmitButton({ mode }: Prop) {
           tempBlogId,
           htmlString: editor.getHTML(),
           title,
-          tags: rest.tags,
+          tags: rest.tag_ids,
         });
       })();
     }

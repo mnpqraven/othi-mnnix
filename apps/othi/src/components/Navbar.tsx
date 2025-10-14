@@ -3,23 +3,22 @@
 import { cn } from "@repo/lib";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import type { HTMLAttributes } from "react";
 import { useViewportInfo } from "./AppListener/hook";
 import { LoggedAvatar } from "./LoggedAvatar";
 
 const HEADER_HEIGHT = 64; // in px
 
-const adminRoutes = ["/sudo", "/whoami"];
+const adminRoutes = ["/", "/sudo", "/whoami"];
+const normalRoutes = ["/", "/blog"];
 
 export function Navbar({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
   const { isScrolled } = useViewportInfo();
-  const path = usePathname();
-  const truncatedPath = `/${path.split("/").at(1) ?? ""}`;
   const { status } = useSession();
+  const routes = status === "authenticated" ? adminRoutes : normalRoutes;
 
   return (
     <div
@@ -32,8 +31,7 @@ export function Navbar({
       {...props}
     >
       <div className="flex gap-2 font-bold font-mono text-2xl">
-        <span>{truncatedPath.toUpperCase()}</span>
-        {(status === "authenticated" ? adminRoutes : ["/blog"]).map((route) => (
+        {routes.map((route) => (
           <Link href={route} key={route}>
             {route.toUpperCase()}
           </Link>

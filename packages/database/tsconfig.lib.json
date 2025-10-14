@@ -4,16 +4,14 @@
     "baseUrl": ".",
     "rootDir": "src",
     "outDir": "dist",
-    "module": "esnext",
-    "moduleResolution": "bundler",
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
-    "emitDeclarationOnly": false,
-    "types": ["node"]
+    "emitDeclarationOnly": true,
+    "types": ["node", "vite/client"]
   },
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../env/tsconfig.lib.json"
+      "path": "../env-agnostic/tsconfig.lib.json"
     }
   ]
 }
