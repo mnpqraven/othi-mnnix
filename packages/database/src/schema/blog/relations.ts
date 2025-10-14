@@ -1,14 +1,15 @@
 import { relations } from "drizzle-orm";
-import { sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { blogTags, blogs } from "./blog";
+import { pgTable, varchar } from "drizzle-orm/pg-core";
+import { blogs } from "./blog";
+import { tags } from "./tag";
 
-export const blogsAndTags = sqliteTable("blogTagMapping", {
-  blogId: text("blog_id")
+export const blogsAndTags = pgTable("blogTagMapping", {
+  blogId: varchar({ length: 255 })
     .notNull()
     .references(() => blogs.id, { onDelete: "cascade" }),
-  tagCode: text("tag_code")
+  tagCode: varchar({ length: 255 })
     .notNull()
-    .references(() => blogTags.code, {
+    .references(() => tags.code, {
       onDelete: "cascade",
     }),
 });
@@ -19,7 +20,7 @@ export const blogsRelations = relations(blogs, ({ many }) => ({
   }),
 }));
 
-export const blogTagsRelations = relations(blogTags, ({ many }) => ({
+export const tagsRelations = relations(tags, ({ many }) => ({
   blogs: many(blogsAndTags, {
     relationName: "tagRelation",
   }),
@@ -31,9 +32,9 @@ export const blogsAndTagsRelations = relations(blogsAndTags, ({ one }) => ({
     references: [blogs.id],
     relationName: "blogRelation",
   }),
-  tag: one(blogTags, {
+  tag: one(tags, {
     fields: [blogsAndTags.tagCode],
-    references: [blogTags.code],
+    references: [tags.code],
     relationName: "tagRelation",
   }),
 }));

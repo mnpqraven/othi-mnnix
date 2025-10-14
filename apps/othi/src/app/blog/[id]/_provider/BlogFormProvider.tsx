@@ -4,8 +4,8 @@ import {
   editorTempBlogIdAtom,
   generateEditorTempBlogIdAtom,
 } from "@/components/editor/store";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertBlogSchema, insertBlogTagSchema } from "@repo/database/schema";
+import { arktypeResolver } from "@hookform/resolvers/arktype";
+import { BlogSchemas } from "@repo/database/schema";
 import type { RouterInputs } from "@repo/protocol";
 import { useTRPC } from "@repo/protocol/trpc/react";
 import { toast } from "@repo/ui/primitive/sonner";
@@ -15,17 +15,12 @@ import { RESET } from "jotai/utils";
 import { useRouter } from "next/navigation";
 import { type ReactNode, createContext, useContext, useEffect } from "react";
 import { type UseFormReturn, useForm } from "react-hook-form";
-import type { z } from "zod";
 
-const metaForm = insertBlogSchema
-  .pick({
-    title: true,
-    publish: true,
-  })
-  .extend({
-    tags: insertBlogTagSchema.shape.code.array().optional(),
-  });
-type MetaForm = z.TypeOf<typeof metaForm>;
+const metaForm = BlogSchemas.select.pick("publish", "title").merge({
+  tag_ids: "string[]",
+});
+
+type MetaForm = typeof metaForm.infer;
 
 export function useBlogForm() {
   const {
@@ -66,7 +61,7 @@ export function BlogFormProvider({
 }: ProviderProps) {
   const router = useRouter();
   const form = useForm<MetaForm>({
-    resolver: zodResolver(metaForm),
+    resolver: arktypeResolver(metaForm),
     defaultValues: {
       title: "",
       ...defaultValue,

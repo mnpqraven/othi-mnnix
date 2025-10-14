@@ -54,7 +54,11 @@
           echo "Running dev containers on target othi"
           pnpx nx dev othi
         '';
-
+        start_db = pkgs.writeShellScriptBin "start_db" ''
+          echo "Starting development database"
+          docker kill $(docker ps -qf publish=4010) 1> /dev/null || echo 'No container running on port 4010'
+          docker run -p 4010:8080 -d -v sqld-data:/var/lib/sqld ghcr.io/tursodatabase/libsql-server:latest
+        '';
       in
       {
         # INFO: nix build
@@ -65,6 +69,7 @@
             dev_all
             dev_othi
             setup_tiptap
+            start_db
             ;
         };
 
@@ -74,7 +79,6 @@
           build_all = {
             type = "app";
             program = "${self.packages.${system}.build_all}/bin/build_all";
-
           };
           dev_all = {
             type = "app";
@@ -87,6 +91,10 @@
           setup_tiptap = {
             type = "app";
             program = "${self.packages.${system}.setup_tiptap}/bin/setup_tiptap";
+          };
+          start_db = {
+            type = "app";
+            program = "${self.packages.${system}.start_db}/bin/start_db";
           };
         };
 

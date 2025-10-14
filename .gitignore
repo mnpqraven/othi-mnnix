@@ -9,6 +9,10 @@ dist
 tmp
 out-tsc
 target
+.output
+.vinxi
+.nitro
+.tanstack-start
 
 # dependencies
 node_modules
